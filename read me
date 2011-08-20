@@ -1,0 +1,13 @@
+@author Nate Gay @thenatedanger
+@copyright 2011 Nate Gay
+@licence GPLv3 <http://www.gnu.org/licenses/gpl.html>
+@version 2011.7.26
+
+TO DO:
+* BUGGY: clue solving system: recheck direcion, and vertical rules.
+* NEED: visualize correct and incorrect answers
+* NEED: redo artwork as high resolution and as CSS sprites
+* NEED: message when puzzle is complete
+* double points if no incorrect guesses were selected
+* login system for tracking scores
+* site wide community chat

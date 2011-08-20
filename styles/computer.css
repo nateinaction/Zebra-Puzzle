@@ -1,0 +1,102 @@
+.board {
+    width: 406px;
+    height: 300px;
+    float:left;
+}
+
+.horizontalClueArea {
+    height: 300px;
+    width: 432px;
+    overflow: visible;
+    float: left;
+}
+
+.verticalClueArea {
+    height: 96px;
+    width: 406px;
+}
+
+.row {
+    width:406px;   
+}
+
+.column {
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    float: left;
+    margin: 5px;
+    border: 1px solid;   
+}
+
+.padding {
+    margin: 8px 0 8px 0;   
+}
+
+.guess {
+    width: 16px;
+    height: 16px;
+    background-size: 16px auto;
+    float: left;
+}
+
+.invisible {
+   opacity:0.3;
+   filter:alpha(opacity=30);
+}
+
+.incorrect {
+    width: 16px;
+    height: 16px;
+    background-size: 16px auto;
+    float: left;
+    visibility: hidden;
+}
+
+.correct {
+    width: 48px;
+    height: 48px;
+	background-size: 48px auto;
+	position: absolute;
+	margin-top: -8px;
+}
+
+.clue {
+    height: 48px;
+    width: 48px;
+    float: left;
+    background-size: 48px auto;
+}
+
+.horizontalClue {
+    height: 56px;
+    width: 144px;
+    overflow: hidden;
+    float: left;
+}
+
+.betweenClue {
+    height: 18px;
+    width: 108px;
+    background-size: 108 auto;
+    position: relative;
+    z-index: 1;
+    margin-left: 18px;
+    margin-bottom: -10px;
+}
+
+.directionClue {
+    height: 8px;
+    width: 48px;
+    background-size: 48 auto;
+    position: absolute;
+    z-index: 1;
+    margin-left: 18px;
+}
+
+.verticalClue {
+    height: 96px;
+    width: 48px;
+    overflow: hidden;
+    float: left;
+}
