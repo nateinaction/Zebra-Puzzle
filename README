@@ -1,7 +1,7 @@
 @author Nate Gay @thenatedanger
 @copyright 2011 Nate Gay
 @licence GPLv3 <http://www.gnu.org/licenses/gpl.html>
-@version 2011.7.26
+@version 0.0a
 
 TO DO:
 * BUGGY: clue solving system: recheck direcion, and vertical rules.
@@ -11,3 +11,6 @@ TO DO:
 * double points if no incorrect guesses were selected
 * login system for tracking scores
 * site wide community chat
+
+VERSION HISTORY:
+* 0.0a - fixed some spacing issues and testing git push.

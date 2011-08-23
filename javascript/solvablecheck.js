@@ -1,89 +1,89 @@
 function validateAnswer(row, column, answer) {
-        	    if (answer == gameBoard[row][column]) {
-			        return true;
-			    }
-			    else {
-			        return false;
-			    };
+	if (answer == gameBoard[row][column]) {
+		return true;
+	}
+	else {
+		return false;
+	};
+};
+            
+function isSolvable(row, column) {
+	var possibilities = 0;
+	if (solvableTile[row][column] == true) {
+		return true;
+	}
+	else {
+		for (var guess = 0; guess <= puzzle.height; guess++) {
+			if (tile[row][column][guess] == true) {
+				possibilities++;
 			};
-            
-            function isSolvable(row, column) {
-                var possibilities = 0;
-                if (solvableTile[row][column] == true) {
-                    return true;
-                }
-                else {
-                    for (var guess = 0; guess <= puzzle.height; guess++) {
-                        if (tile[row][column][guess] == true) {
-                            possibilities++;
-                        };
-                    };
-                    if (possibilities == 1) {
-                        return true;
-                        solvableTile[row][column] = true;
-                        changeCSS(row, column, gameBoard[row][column]);
-                    }
-                    else {
-                        return false;
-                    };
-                };
-            };
-            
-            function checkSolvable() {
-                for (var row = 0; row <= puzzle.height; row++) { // for each row
-                    for (var column = 0; column <= puzzle.width; column++) { // for every column
-                        isSolvable(row, column);
-                    };
-                };
-            };
-            
-            function isPossible(row, column, guess) {
-                if (tile[row][column][guess] == true) {
-                    return true;
-                }
-                else {
-                    return false;
-                };
-            };
-            
-            function setPossible(bool, row, column, guess) {
-                if (bool == true) {
-                    tile[row][column][guess] = true;
-                    $("#" + row + column + guess).removeClass("invisible");
-                }
-                else {
-                    tile[row][column][guess] = false;
-                    $("#" + row + column + guess).addClass("invisible");
-                };
-            };
-            
-            /*  Using all available rules, the purpose of this function
-                is to deduce the answer by ruling out possibilities.
-                Whenever a possibility is ruled out this function recurses. */ 
-            function checkPossibilities() {
-                var recheck = false;
-                for (var possibilities = 0; possibilities < clueNum; possibilities++) { // for each clue
-                    for (var column = 0; column <= puzzle.width; column++) { // for every column
-                        console.log("possibility " + possibilities + ", column " + column);
-                        // vertical clues get checked
-                        if (clues[possibilities][0] == 'vertical') {
-                            var clueRow = Object(),
-                                clueAnswer = Object();
-                                
-                            clueRow.top = clues[possibilities][1],
-                            clueAnswer.top = clues[possibilities][2],
-                            clueRow.bottom = clues[possibilities][3],
-                            clueAnswer.bottom = clues[possibilities][4];
+		};
+		if (possibilities == 1) {
+			return true;
+			solvableTile[row][column] = true;
+			changeCSS(row, column, gameBoard[row][column]);
+		}
+		else {
+			return false;
+		};
+	};
+};
 
-                            if (isPossible(clueRow.top, column, clueAnswer.top) == false && isPossible(clueRow.bottom, column, clueAnswer.bottom) == true) {
-                                setPossible(false, clueRow.bottom, column, clueAnswer.bottom);
-                                recheck = true;
-                            };
-                            if (isPossible(clueRow.bottom, column, clueAnswer.bottom) == false && isPossible(clueRow.top, column, clueAnswer.top) == true) {
-                                setPossible(false, clueRow.top, column, clueAnswer.top);
-                                recheck = true;
-                            };
-                        }
+function checkSolvable() {
+	for (var row = 0; row <= puzzle.height; row++) { // for each row
+		for (var column = 0; column <= puzzle.width; column++) { // for every column
+			isSolvable(row, column);
+		};
+	};
+};
+            
+function isPossible(row, column, guess) {
+	if (tile[row][column][guess] == true) {
+		return true;
+	}
+	else {
+		return false;
+	};
+};
+
+function setPossible(bool, row, column, guess) {
+	if (bool == true) {
+		tile[row][column][guess] = true;
+		$("#" + row + column + guess).removeClass("invisible");
+	}
+	else {
+		tile[row][column][guess] = false;
+		$("#" + row + column + guess).addClass("invisible");
+	};
+};
+            
+/*	Using all available rules, the purpose of this function
+		is to deduce the answer by ruling out possibilities.
+		Whenever a possibility is ruled out this function recurses. */ 
+function checkPossibilities() {
+	var recheck = false;
+	for (var possibilities = 0; possibilities < clueNum; possibilities++) { // for each clue
+		for (var column = 0; column <= puzzle.width; column++) { // for every column
+			console.log("possibility " + possibilities + ", column " + column);
+			// vertical clues get checked
+			if (clues[possibilities][0] == 'vertical') {
+				var clueRow = Object(),
+						clueAnswer = Object();
+                                
+				clueRow.top = clues[possibilities][1],
+				clueAnswer.top = clues[possibilities][2],
+				clueRow.bottom = clues[possibilities][3],
+				clueAnswer.bottom = clues[possibilities][4];
+
+				if (isPossible(clueRow.top, column, clueAnswer.top) == false && isPossible(clueRow.bottom, column, clueAnswer.bottom) == true) {
+					setPossible(false, clueRow.bottom, column, clueAnswer.bottom);
+					recheck = true;
+				};
+				if (isPossible(clueRow.bottom, column, clueAnswer.bottom) == false && isPossible(clueRow.top, column, clueAnswer.top) == true) {
+					setPossible(false, clueRow.top, column, clueAnswer.top);
+					recheck = true;
+				};
+			}
                         // near clues get checked
                         else if (clues[possibilities][0] == 'near') {
                             var clueRow = Object(),
