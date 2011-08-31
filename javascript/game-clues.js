@@ -26,14 +26,22 @@ function betweenClue() {
 //		checkPossibilities();
 	}
 	else {
-		$(".horizontalClueArea").append('<div class="horizontalClue"><div class="betweenClue" style="background-image:url(' + resources + 'clues/between.gif);"></div><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.center + '/' + clueCenter + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="clue"></div></div>');
-		clues.push(['between', clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight]);
 		clueNum++;
+		$(".horizontalClueArea").append('<div class="horizontalClue' + clueNum + '"><div class="betweenClue" style="background-image:url(' + resources + 'clues/between.gif);"></div><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.center + '/' + clueCenter + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="clue"></div></div>');
+		$("#horizontalClue" + clueNum).rightClick( function(e) {
+			if (this.hasClass("flagged") == true) {
+				$(this).removeClass("flagged");
+			}
+			else if (this.hasClass("flagged") == false) {
+				$(this).addClass("flagged");
+			};
+		});
+		clues.between.push([clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight]);
 //		checkPossibilities();
 	};
 };
             
-function directionClue() {
+function directionalClue() {
 	var clueRow = Object(),
 			clueColumn = Object();
 			
@@ -55,7 +63,7 @@ function directionClue() {
 	}
 else {
 		$(".horizontalClueArea").append('<div class="horizontalClue"><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'clues/direction.gif);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="clue"></div></div>');
-		clues.push(['direction', clueRow.left, clueLeft, clueRow.right, clueRight]);
+		clues.directional.push([clueRow.left, clueLeft, clueRow.right, clueRight]);
 		clueNum++;
 //		checkPossibilities();
 	};
@@ -93,7 +101,7 @@ function nearClue() {
 	}
 	else {
 		$(".horizontalClueArea").append('<div class="horizontalClue"><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'clues/near.gif);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="clue"></div></div>');
-		clues.push(['near', clueRow.left, clueLeft, clueRow.right, clueRight]);
+		clues.near.push([clueRow.left, clueLeft, clueRow.right, clueRight]);
 		clueNum++;
 //		checkPossibilities();
 	};
@@ -122,7 +130,7 @@ function verticalClue() {
 	}
 	else {
 		$(".verticalClueArea").append('<div class="verticalClue"><div style="background-image:url(' + resources + 'row' + clueRow.top + '/' + clueTop + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.bottom + '/' + clueBottom + '.jpg);" class="clue"></div></div>')
-		clues.push(['vertical', clueRow.top, clueTop, clueRow.bottom, clueBottom]);
+		clues.vertical.push([clueRow.top, clueTop, clueRow.bottom, clueBottom]);
 		clueNum++;
 //		checkPossibilities();
 	};          
@@ -137,7 +145,7 @@ function randomClue() {
 			new nearClue();
 			break;
 		case 2:
-			new directionClue();
+			new directionalClue();
 			break;
 		case 3:
 			new verticalClue();

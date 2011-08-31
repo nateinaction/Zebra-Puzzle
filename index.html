@@ -17,6 +17,7 @@
 		var puzzle = {
 					height : 2,
 					width : 5,
+					solvable : false,
 					solved : false
 				},
 				block = {
@@ -24,8 +25,12 @@
 					solvable : Array(),
 					solved : Array()
 				},
-				tile = Array(),
-				clues = Array(),
+				clues = {
+					between : Array(),
+					near : Array(),
+					directional : Array(),
+					vertical : Array()
+				},
 				clueNum = 0,
 				score = 0,
 				resources = "http://www.sheilacallaham.com/nate/einstein/images/";

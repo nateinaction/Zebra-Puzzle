@@ -9,7 +9,8 @@ http://en.wikipedia.org/wiki/Deductive_reasoning
 http://en.wikipedia.org/wiki/Cognitive_map
 
 PROJECT DIRECTION:
-* CRITICAL: I would like to stop generating clues when the puzzle is solvable. This is currently broken.
+* CRITICAL: I would like to stop generating clues when the puzzle is solvable.
+* CRITICAL: I would like to stop clues from repeating.
 * HIGH: I would like to visually indicate to the player whether they've selected a correct or incorrect answer.
 * HIGH: I would like to congratulate a player who has successfully completed a puzzle with some fuzzy warm feelings and a summary of their score.
 * MEDIUM: I would like to add a way of tracking scores, preferably through a social network tie-in like facebook or google plus.
@@ -26,6 +27,6 @@ PROJECT APPENDIX:
 * block: A block is single square on the game board. It can either be solved, consisting of a single tile, or unsolved, consisting of 6 small tiles. Blocks can also be solvable and unsolvable based on the available clues.
 * tile: A tile is a playing piece on the game board. It can be shown to the player in four distinct ways: unsolved, solved, flagged, and incorrect.
 * flagged: A flagged tile or clue will become translucent on right click. Only tiles and clues can be flagged.
-* clue: A clue gives a hint as to the location of a tile. Clues can be flagged or unflagged.
+* clue: A clue gives a hint as to the location of a tile. There are four types of clues between, near, directional, and vertical. Clues can be flagged or unflagged.
 * game-board.js: The purpose of game-board.js is to randomize the answers, validate answers on user input, and setup the HTML elements that make up the game board.
 * user-input.js: The purpose of user-input.js is to process left clicks from the user into any CSS, score, or other game related changes.
