@@ -25,7 +25,7 @@ function betweenClue() {
 			
 	// check for repeating between clues
 	var tempArray = [clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight], repeat = false;
-	for (var x = 0; x < clues.between.length(); x++) {
+	for (var x = 0; x < clues.between[].length(); x++) {
 		if (tempArray == clues.between[x]){
 			repeat = true;
 		};
@@ -69,7 +69,7 @@ function directionalClue() {
 
 	// check for repeating directional clues
 	var tempArray = [clueRow.left, clueLeft, clueRow.right, clueRight], repeat = false;
-	for (var x = 0; x < clues.directional.length(); x++) {
+	for (var x = 0; x < clues.directional[].length(); x++) {
 		if (tempArray == clues.directional[x]){
 			repeat = true;
 		};
@@ -123,7 +123,7 @@ function nearClue() {
 			
 	// check for repeating near clues
 	var tempArray = [clueRow.left, clueLeft, clueRow.right, clueRight], repeat = false;
-	for (var x = 0; x < clues.near.length(); x++) {
+	for (var x = 0; x < clues.near[].length(); x++) {
 		if (tempArray == clues.near[x]){
 			repeat = true;
 		};
@@ -167,7 +167,7 @@ function verticalClue() {
 
 	// check for repeating vertical clues
 	var tempArray = [clueRow.top, clueTop, clueRow.bottom, clueBottom], repeat = false;
-	for (var x = 0; x < clues.vertical.length(); x++) {
+	for (var x = 0; x < clues.vertical[].length(); x++) {
 		if (tempArray == clues.vertical[x]){
 			repeat = true;
 		};
