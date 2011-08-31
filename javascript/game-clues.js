@@ -183,10 +183,10 @@ function verticalClue() {
 	clueBottom = block.answer[clueRow.bottom][clueColumn];
 
 	// check for repeating vertical clues
-	var tempArray = [clueRow.top, clueTop, clueRow.bottom, clueBottom], repeat = false;
+	var tempArray = JSON.stringify([clueRow.top, clueTop, clueRow.bottom, clueBottom]), repeat = false;
 	for (var x = 0; x < clues.vertical.length; x++) {
-		console.log(tempArray + " and " + clues.vertical[x])
-		if (tempArray == clues.vertical[x]){
+		console.log(tempArray + " and " + JSON.stringify(clues.vertical[x]))
+		if (tempArray == JSON.stringify(clues.vertical[x])){
 			console.log("Vertical clue " + clueNum + 1 + " has repeated.")
 			repeat = true;
 		};
