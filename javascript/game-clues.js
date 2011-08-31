@@ -62,9 +62,17 @@ function directionalClue() {
 //		checkPossibilities();
 	}
 else {
-		$(".horizontalClueArea").append('<div class="horizontalClue"><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'clues/direction.gif);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="clue"></div></div>');
-		clues.directional.push([clueRow.left, clueLeft, clueRow.right, clueRight]);
 		clueNum++;
+		$(".horizontalClueArea").append('<div class="horizontalClue clue' + clueNum + '"><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'clues/direction.gif);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="clue"></div></div>');
+		$(".clue" + clueNum).rightClick( function(e) {
+			if (this.hasClass("flagged") == true) {
+				$(this).removeClass("flagged");
+			}
+			else if (this.hasClass("flagged") == false) {
+				$(this).addClass("flagged");
+			};
+		});
+		clues.directional.push([clueRow.left, clueLeft, clueRow.right, clueRight]);
 //		checkPossibilities();
 	};
 };
@@ -100,9 +108,17 @@ function nearClue() {
 //		checkPossibilities();
 	}
 	else {
-		$(".horizontalClueArea").append('<div class="horizontalClue"><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'clues/near.gif);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="clue"></div></div>');
-		clues.near.push([clueRow.left, clueLeft, clueRow.right, clueRight]);
 		clueNum++;
+		$(".horizontalClueArea").append('<div class="horizontalClue clue' + clueNum + '"><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'clues/near.gif);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="clue"></div></div>');
+		$(".clue" + clueNum).rightClick( function(e) {
+			if (this.hasClass("flagged") == true) {
+				$(this).removeClass("flagged");
+			}
+			else if (this.hasClass("flagged") == false) {
+				$(this).addClass("flagged");
+			};
+		});
+		clues.near.push([clueRow.left, clueLeft, clueRow.right, clueRight]);
 //		checkPossibilities();
 	};
 };
@@ -129,9 +145,17 @@ function verticalClue() {
 //		checkPossibilities();
 	}
 	else {
-		$(".verticalClueArea").append('<div class="verticalClue"><div style="background-image:url(' + resources + 'row' + clueRow.top + '/' + clueTop + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.bottom + '/' + clueBottom + '.jpg);" class="clue"></div></div>')
-		clues.vertical.push([clueRow.top, clueTop, clueRow.bottom, clueBottom]);
 		clueNum++;
+		$(".verticalClueArea").append('<div class="verticalClue clue' + clueNum + '"><div style="background-image:url(' + resources + 'row' + clueRow.top + '/' + clueTop + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.bottom + '/' + clueBottom + '.jpg);" class="clue"></div></div>')
+		$(".clue" + clueNum).rightClick( function(e) {
+			if (this.hasClass("flagged") == true) {
+				$(this).removeClass("flagged");
+			}
+			else if (this.hasClass("flagged") == false) {
+				$(this).addClass("flagged");
+			};
+		});
+		clues.vertical.push([clueRow.top, clueTop, clueRow.bottom, clueBottom]);
 //		checkPossibilities();
 	};          
 };
