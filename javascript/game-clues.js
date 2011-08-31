@@ -22,8 +22,17 @@ function betweenClue() {
 	var clueLeft = block.answer[clueRow.left][clueColumn.left],
 			clueCenter = block.answer[clueRow.center][clueColumn.center],
 			clueRight = block.answer[clueRow.right][clueColumn.right];
-	if (block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.center][clueColumn.center] == true && block.solvable[clueRow.right][clueColumn.right] == true) {
-		randomClue();
+			
+	// check for repeating between clues
+	var tempArray = [clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight], repeat = false;
+	for (var x = 0; x < clues.between.length(); x++) {
+		if (tempArray == clues.between[x]){
+			repeat = true;
+		};
+	};
+	
+	if ((block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.center][clueColumn.center] == true && block.solvable[clueRow.right][clueColumn.right] == true) || repeat == true) {
+		randomClue(); // if all three blocks are solvable, we don't need another clue.
 	}
 	else {
 		clueNum++;
@@ -57,7 +66,16 @@ function directionalClue() {
 							
 	var clueLeft = block.answer[clueRow.left][clueColumn.left],
 			clueRight = block.answer[clueRow.right][clueColumn.right];
-	if (block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.right][clueColumn.right] == true) {
+
+	// check for repeating directional clues
+	var tempArray = [clueRow.left, clueLeft, clueRow.right, clueRight], repeat = false;
+	for (var x = 0; x < clues.directional.length(); x++) {
+		if (tempArray == clues.directional[x]){
+			repeat = true;
+		};
+	};
+	
+	if ((block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.right][clueColumn.right] == true) || repeat == true) {
 		randomClue();
 	}
 else {
@@ -102,7 +120,16 @@ function nearClue() {
 
 	var clueLeft = block.answer[clueRow.left][clueColumn.left],
 			clueRight = block.answer[clueRow.right][clueColumn.right];
-	if (block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.right][clueColumn.right] == true) {
+			
+	// check for repeating near clues
+	var tempArray = [clueRow.left, clueLeft, clueRow.right, clueRight], repeat = false;
+	for (var x = 0; x < clues.near.length(); x++) {
+		if (tempArray == clues.near[x]){
+			repeat = true;
+		};
+	};
+	
+	if ((block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.right][clueColumn.right] == true) || repeat == true) {
 		randomClue();
 	}
 	else {
@@ -137,8 +164,16 @@ function verticalClue() {
 
 	clueTop = block.answer[clueRow.top][clueColumn];
 	clueBottom = block.answer[clueRow.bottom][clueColumn];
-						
-	if (block.solvable[clueRow.top][clueColumn] == true && block.solvable[clueRow.bottom][clueColumn] == true) {
+
+	// check for repeating vertical clues
+	var tempArray = [clueRow.top, clueTop, clueRow.bottom, clueBottom], repeat = false;
+	for (var x = 0; x < clues.vertical.length(); x++) {
+		if (tempArray == clues.vertical[x]){
+			repeat = true;
+		};
+	};
+	
+	if ((block.solvable[clueRow.top][clueColumn] == true && block.solvable[clueRow.bottom][clueColumn] == true) || repeat == true) {
 		randomClue();
 	}
 	else {
