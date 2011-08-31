@@ -19,9 +19,9 @@ function betweenClue() {
 		clueColumn.right = clueColumn.center + 1;
 	};
                 
-	var clueLeft = gameBoard[clueRow.left][clueColumn.left],
-			clueCenter = gameBoard[clueRow.center][clueColumn.center],
-			clueRight = gameBoard[clueRow.right][clueColumn.right];
+	var clueLeft = puzzle.solved[clueRow.left][clueColumn.left],
+			clueCenter = puzzle.solved[clueRow.center][clueColumn.center],
+			clueRight = puzzle.solved[clueRow.right][clueColumn.right];
 	if (solvableTile[clueRow.left][clueColumn.left] == true && solvableTile[clueRow.center][clueColumn.center] == true && solvableTile[clueRow.right][clueColumn.right] == true) {
 //		checkPossibilities();
 	}
@@ -48,8 +48,8 @@ function directionClue() {
 		clueColumn.right = Math.floor(Math.random() * (puzzle.width + 1));
 	};
 							
-	var clueLeft = gameBoard[clueRow.left][clueColumn.left],
-			clueRight = gameBoard[clueRow.right][clueColumn.right];
+	var clueLeft = puzzle.solved[clueRow.left][clueColumn.left],
+			clueRight = puzzle.solved[clueRow.right][clueColumn.right];
 	if (solvableTile[clueRow.left][clueColumn.left] == true && solvableTile[clueRow.right][clueColumn.right] == true) {
 //		checkPossibilities();
 	}
@@ -86,8 +86,8 @@ function nearClue() {
 		};
 	};
 
-	var clueLeft = gameBoard[clueRow.left][clueColumn.left],
-			clueRight = gameBoard[clueRow.right][clueColumn.right];
+	var clueLeft = puzzle.solved[clueRow.left][clueColumn.left],
+			clueRight = puzzle.solved[clueRow.right][clueColumn.right];
 	if (solvableTile[clueRow.left][clueColumn.left] == true && solvableTile[clueRow.right][clueColumn.right] == true) {
 //		checkPossibilities();
 	}
@@ -114,8 +114,8 @@ function verticalClue() {
 	// randomly select column
 	clueColumn = Math.floor(Math.random() * (puzzle.width + 1));
 
-	clueTop = gameBoard[clueRow.top][clueColumn];
-	clueBottom = gameBoard[clueRow.bottom][clueColumn];
+	clueTop = puzzle.solved[clueRow.top][clueColumn];
+	clueBottom = puzzle.solved[clueRow.bottom][clueColumn];
 						
 	if (solvableTile[clueRow.top][clueColumn] == true && solvableTile[clueRow.bottom][clueColumn] == true) {
 //		checkPossibilities();
