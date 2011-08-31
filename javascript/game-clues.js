@@ -186,6 +186,7 @@ function verticalClue() {
 	var tempArray = [clueRow.top, clueTop, clueRow.bottom, clueBottom], repeat = false;
 	for (var x = 0; x < clues.vertical.length; x++) {
 		if (tempArray == clues.vertical[x]){
+			console.log("Vertical clue " + clueNum + 1 + " has repeated.")
 			repeat = true;
 		};
 	};
