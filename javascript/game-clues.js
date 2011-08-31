@@ -41,9 +41,9 @@ function betweenClue() {
 			clueRight = block.answer[clueRow.right][clueColumn.right];
 			
 	// check for repeating between clues
-	var tempArray = [clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight], tempArrayInverse = [clueRow.right, clueRight, clueRow.center, clueCenter, clueRow.left, clueLeft], repeat = false;
+	var tempArray = JSON.stringify([clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight]), tempArrayInverse = JSON.stringify([clueRow.right, clueRight, clueRow.center, clueCenter, clueRow.left, clueLeft]), repeat = false;
 	for (var x = 0; x < clues.between.length; x++) {
-		if (tempArray == clues.between[x] || tempArrayInverse == clues.between[x]){
+		if (tempArray == JSON.stringify(clues.between[x]) || JSON.stringify(tempArrayInverse == clues.between[x])){
 			repeat = true;
 		};
 	};
@@ -85,9 +85,9 @@ function directionalClue() {
 			clueRight = block.answer[clueRow.right][clueColumn.right];
 
 	// check for repeating directional clues
-	var tempArray = [clueRow.left, clueLeft, clueRow.right, clueRight], repeat = false;
+	var tempArray = JSON.stringify([clueRow.left, clueLeft, clueRow.right, clueRight]), repeat = false;
 	for (var x = 0; x < clues.directional.length; x++) {
-		if (tempArray == clues.directional[x]){
+		if (tempArray == JSON.stringify(clues.directional[x])){
 			repeat = true;
 		};
 	};
@@ -139,9 +139,9 @@ function nearClue() {
 			clueRight = block.answer[clueRow.right][clueColumn.right];
 			
 	// check for repeating near clues
-	var tempArray = [clueRow.left, clueLeft, clueRow.right, clueRight], tempArrayInverse = [clueRow.right, clueRight, clueRow.left, clueLeft], repeat = false;
+	var tempArray = JSON.stringify([clueRow.left, clueLeft, clueRow.right, clueRight]), tempArrayInverse = JSON.stringify([clueRow.right, clueRight, clueRow.left, clueLeft]), repeat = false;
 	for (var x = 0; x < clues.near.length; x++) {
-		if (tempArray == clues.near[x] || tempArrayInverse == clues.near[x]){
+		if (tempArray == JSON.stringify(clues.near[x]) || tempArrayInverse == JSON.stringify(clues.near[x])){
 			repeat = true;
 		};
 	};
@@ -185,9 +185,7 @@ function verticalClue() {
 	// check for repeating vertical clues
 	var tempArray = JSON.stringify([clueRow.top, clueTop, clueRow.bottom, clueBottom]), repeat = false;
 	for (var x = 0; x < clues.vertical.length; x++) {
-		console.log(tempArray + " and " + JSON.stringify(clues.vertical[x]))
 		if (tempArray == JSON.stringify(clues.vertical[x])){
-			console.log("Vertical clue " + clueNum + 1 + " has repeated.")
 			repeat = true;
 		};
 	};
