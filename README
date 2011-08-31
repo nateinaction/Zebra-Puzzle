@@ -23,9 +23,9 @@ VERSION HISTORY:
 
 PROJECT APPENDIX:
 * game board: The game board is the playing surface. It contains multiple rows and columns of blocks as well as all the clues.
-* block: A block is single square on the game board. It can either be solved, consisting of a single tile, or unsolved, consisting of 6 small tiles.
+* block: A block is single square on the game board. It can either be solved, consisting of a single tile, or unsolved, consisting of 6 small tiles. Blocks can also be solvable and unsolvable based on the available clues.
 * tile: A tile is a playing piece on the game board. It can be shown to the player in four distinct ways: unsolved, solved, flagged, and incorrect.
-* flagged: A flagged tile or clue will become translucent on right click.
-* clue: A clue 
+* flagged: A flagged tile or clue will become translucent on right click. Only tiles and clues can be flagged.
+* clue: A clue gives a hint as to the location of a tile. Clues can be flagged or unflagged.
 * game-board.js: The purpose of game-board.js is to randomize the answers, and setup the HTML elements that make up the game board.
 * user-input.js: The purpose of user-input.js is to process left clicks from the user into any CSS, score, or other game related changes.

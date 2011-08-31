@@ -4,19 +4,19 @@
 
 function randomizeAnswers() {
 	for (var row = 0; row <= puzzle.height; row++) {
-		puzzle.solved[row] = Array(); // setup an array to hold random answers for each column in each row
-		solvableBlock[row] = Array(); // setup an array to hold solvable blocks for each column in each row
+		block.solved[row] = Array(); // setup an array to hold random answers for each column in each row
+		block.solvable[row] = Array(); // setup an array to hold solvable blocks for each column in each row
 		for (var column = 0; column <= puzzle.width; column++) {
 			var number = Math.floor(Math.random() * (puzzle.width + 1));
-			solvableBlock[row][column] = false; // set all blocks as not solvable.
-			if (puzzle.solved[row].indexOf(number) == -1) {
-				puzzle.solved[row][column] = number; // fill the column with a random answer between 0 and the puzzle width
+			block.solvable[row][column] = false; // set all blocks as not solvable.
+			if (block.solved[row].indexOf(number) == -1) {
+				block.solved[row][column] = number; // fill the column with a random answer between 0 and the puzzle width
 			}
 			else {
-				while (puzzle.solved[row].indexOf(number) != -1) {
+				while (block.solved[row].indexOf(number) != -1) {
 					number = Math.floor(Math.random() * (puzzle.width + 1)); // if the answer has already been used in the row, repeat until an unused answer is generated.
 				};
-				puzzle.solved[row][column] = number;
+				block.solved[row][column] = number;
 			};
 		};
 	};

@@ -15,14 +15,16 @@
 		<script language="JavaScript">
 // setup global variables
 		var puzzle = {
-						height : 2,
-						width : 5,
-						solved : Array()
+					height : 2,
+					width : 5,
+					solved : false
 				},
-				solvableBlock = Array(),
+				block = {
+					answer : Array(),
+					solvable : Array(),
+					solved : Array()
+				},
 				tile = Array(),
-				solvable = false,
-				solved = false,
 				clues = Array(),
 				clueNum = 0,
 				score = 0,

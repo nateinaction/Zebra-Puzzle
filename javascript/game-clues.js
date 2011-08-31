@@ -19,10 +19,10 @@ function betweenClue() {
 		clueColumn.right = clueColumn.center + 1;
 	};
                 
-	var clueLeft = puzzle.solved[clueRow.left][clueColumn.left],
-			clueCenter = puzzle.solved[clueRow.center][clueColumn.center],
-			clueRight = puzzle.solved[clueRow.right][clueColumn.right];
-	if (solvableBlock[clueRow.left][clueColumn.left] == true && solvableBlock[clueRow.center][clueColumn.center] == true && solvableBlock[clueRow.right][clueColumn.right] == true) {
+	var clueLeft = block.solved[clueRow.left][clueColumn.left],
+			clueCenter = block.solved[clueRow.center][clueColumn.center],
+			clueRight = block.solved[clueRow.right][clueColumn.right];
+	if (block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.center][clueColumn.center] == true && block.solvable[clueRow.right][clueColumn.right] == true) {
 //		checkPossibilities();
 	}
 	else {
@@ -48,9 +48,9 @@ function directionClue() {
 		clueColumn.right = Math.floor(Math.random() * (puzzle.width + 1));
 	};
 							
-	var clueLeft = puzzle.solved[clueRow.left][clueColumn.left],
-			clueRight = puzzle.solved[clueRow.right][clueColumn.right];
-	if (solvableBlock[clueRow.left][clueColumn.left] == true && solvableBlock[clueRow.right][clueColumn.right] == true) {
+	var clueLeft = block.solved[clueRow.left][clueColumn.left],
+			clueRight = block.solved[clueRow.right][clueColumn.right];
+	if (block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.right][clueColumn.right] == true) {
 //		checkPossibilities();
 	}
 else {
@@ -86,9 +86,9 @@ function nearClue() {
 		};
 	};
 
-	var clueLeft = puzzle.solved[clueRow.left][clueColumn.left],
-			clueRight = puzzle.solved[clueRow.right][clueColumn.right];
-	if (solvableBlock[clueRow.left][clueColumn.left] == true && solvableBlock[clueRow.right][clueColumn.right] == true) {
+	var clueLeft = block.solved[clueRow.left][clueColumn.left],
+			clueRight = block.solved[clueRow.right][clueColumn.right];
+	if (block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.right][clueColumn.right] == true) {
 //		checkPossibilities();
 	}
 	else {
@@ -114,10 +114,10 @@ function verticalClue() {
 	// randomly select column
 	clueColumn = Math.floor(Math.random() * (puzzle.width + 1));
 
-	clueTop = puzzle.solved[clueRow.top][clueColumn];
-	clueBottom = puzzle.solved[clueRow.bottom][clueColumn];
+	clueTop = block.solved[clueRow.top][clueColumn];
+	clueBottom = block.solved[clueRow.bottom][clueColumn];
 						
-	if (solvableBlock[clueRow.top][clueColumn] == true && solvableBlock[clueRow.bottom][clueColumn] == true) {
+	if (block.solvable[clueRow.top][clueColumn] == true && block.solvable[clueRow.bottom][clueColumn] == true) {
 //		checkPossibilities();
 	}
 	else {
