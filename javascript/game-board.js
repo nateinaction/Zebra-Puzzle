@@ -42,6 +42,7 @@ function displayGameBoard() {
 			for (var guess = 0; guess <= puzzle.width; guess++) {
 				document.write('<div id="' + row + column + guess + '" style="background-image:url(' + resources + 'row' + row + '/' + guess + '.jpg);" class="guess"></div>');
 				$(row + column + guess).click(function(x, y, z) {
+					alert("test2");
 					return function() {
 						alert("test");
 						userInput(x, y, z);
