@@ -1,5 +1,5 @@
 /*
-	The purpose of game-board.js is to randomize the answers, validate answers on user input, and setup the HTML elements that make up the game board.
+	The purpose of game-board.js is to randomize the answers, validate answers, and setup the HTML elements that make up the game board.
 */
 
 function randomizeAnswers() {

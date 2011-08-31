@@ -23,7 +23,7 @@ function betweenClue() {
 			clueCenter = block.answer[clueRow.center][clueColumn.center],
 			clueRight = block.answer[clueRow.right][clueColumn.right];
 	if (block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.center][clueColumn.center] == true && block.solvable[clueRow.right][clueColumn.right] == true) {
-//		checkPossibilities();
+		randomClue();
 	}
 	else {
 		clueNum++;
@@ -37,7 +37,6 @@ function betweenClue() {
 			};
 		});
 		clues.between.push([clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight]);
-//		checkPossibilities();
 	};
 };
             
@@ -59,7 +58,7 @@ function directionalClue() {
 	var clueLeft = block.answer[clueRow.left][clueColumn.left],
 			clueRight = block.answer[clueRow.right][clueColumn.right];
 	if (block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.right][clueColumn.right] == true) {
-//		checkPossibilities();
+		randomClue();
 	}
 else {
 		clueNum++;
@@ -73,7 +72,6 @@ else {
 			};
 		});
 		clues.directional.push([clueRow.left, clueLeft, clueRow.right, clueRight]);
-//		checkPossibilities();
 	};
 };
             
@@ -105,7 +103,7 @@ function nearClue() {
 	var clueLeft = block.answer[clueRow.left][clueColumn.left],
 			clueRight = block.answer[clueRow.right][clueColumn.right];
 	if (block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.right][clueColumn.right] == true) {
-//		checkPossibilities();
+		randomClue();
 	}
 	else {
 		clueNum++;
@@ -119,7 +117,6 @@ function nearClue() {
 			};
 		});
 		clues.near.push([clueRow.left, clueLeft, clueRow.right, clueRight]);
-//		checkPossibilities();
 	};
 };
             
@@ -142,7 +139,7 @@ function verticalClue() {
 	clueBottom = block.answer[clueRow.bottom][clueColumn];
 						
 	if (block.solvable[clueRow.top][clueColumn] == true && block.solvable[clueRow.bottom][clueColumn] == true) {
-//		checkPossibilities();
+		randomClue();
 	}
 	else {
 		clueNum++;
@@ -156,7 +153,6 @@ function verticalClue() {
 			};
 		});
 		clues.vertical.push([clueRow.top, clueTop, clueRow.bottom, clueBottom]);
-//		checkPossibilities();
 	};          
 };
             
