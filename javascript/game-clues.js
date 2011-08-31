@@ -19,9 +19,9 @@ function betweenClue() {
 		clueColumn.right = clueColumn.center + 1;
 	};
                 
-	var clueLeft = block.solved[clueRow.left][clueColumn.left],
-			clueCenter = block.solved[clueRow.center][clueColumn.center],
-			clueRight = block.solved[clueRow.right][clueColumn.right];
+	var clueLeft = block.answer[clueRow.left][clueColumn.left],
+			clueCenter = block.answer[clueRow.center][clueColumn.center],
+			clueRight = block.answer[clueRow.right][clueColumn.right];
 	if (block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.center][clueColumn.center] == true && block.solvable[clueRow.right][clueColumn.right] == true) {
 //		checkPossibilities();
 	}
@@ -48,8 +48,8 @@ function directionClue() {
 		clueColumn.right = Math.floor(Math.random() * (puzzle.width + 1));
 	};
 							
-	var clueLeft = block.solved[clueRow.left][clueColumn.left],
-			clueRight = block.solved[clueRow.right][clueColumn.right];
+	var clueLeft = block.answer[clueRow.left][clueColumn.left],
+			clueRight = block.answer[clueRow.right][clueColumn.right];
 	if (block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.right][clueColumn.right] == true) {
 //		checkPossibilities();
 	}
@@ -86,8 +86,8 @@ function nearClue() {
 		};
 	};
 
-	var clueLeft = block.solved[clueRow.left][clueColumn.left],
-			clueRight = block.solved[clueRow.right][clueColumn.right];
+	var clueLeft = block.answer[clueRow.left][clueColumn.left],
+			clueRight = block.answer[clueRow.right][clueColumn.right];
 	if (block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.right][clueColumn.right] == true) {
 //		checkPossibilities();
 	}
@@ -114,8 +114,8 @@ function verticalClue() {
 	// randomly select column
 	clueColumn = Math.floor(Math.random() * (puzzle.width + 1));
 
-	clueTop = block.solved[clueRow.top][clueColumn];
-	clueBottom = block.solved[clueRow.bottom][clueColumn];
+	clueTop = block.answer[clueRow.top][clueColumn];
+	clueBottom = block.answer[clueRow.bottom][clueColumn];
 						
 	if (block.solvable[clueRow.top][clueColumn] == true && block.solvable[clueRow.bottom][clueColumn] == true) {
 //		checkPossibilities();
