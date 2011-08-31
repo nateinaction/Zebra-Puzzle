@@ -28,14 +28,6 @@ function betweenClue() {
 	else {
 		clueNum++;
 		$(".horizontalClueArea").append('<div class="horizontalClue' + clueNum + '"><div class="betweenClue" style="background-image:url(' + resources + 'clues/between.gif);"></div><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.center + '/' + clueCenter + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="clue"></div></div>');
-		$("#horizontalClue" + clueNum).rightClick( function(e) {
-			if (this.hasClass("flagged") == true) {
-				$(this).removeClass("flagged");
-			}
-			else if (this.hasClass("flagged") == false) {
-				$(this).addClass("flagged");
-			};
-		});
 		clues.between.push([clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight]);
 //		checkPossibilities();
 	};
