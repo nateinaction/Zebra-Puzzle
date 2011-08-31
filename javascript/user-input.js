@@ -1,4 +1,4 @@
-function changeCSS(row, column, answer) {
+function userInput(row, column, answer) {
 	if ($("#" + row + column + answer).hasClass("correct") == false) {
 		var answerBool = validateAnswer(row, column, answer); // is answer correct or incorrect?
 		if (answerBool == true) { // if answer is correct
@@ -21,7 +21,7 @@ function changeCSS(row, column, answer) {
 							guessAutoCorrect.push(guessCount); // place the position of the guess in an array
 						};
 						if (guessCount == 5 && guessAutoCorrect.length == 1) { // if we've counted all the guesses and there is only one in the array
-						changeCSS(row, clean, guessAutoCorrect[0]); // recurse the function to mark the guess as correct
+						userInput(row, clean, guessAutoCorrect[0]); // recurse the function to mark the guess as correct
 					};
 				};
 			};
@@ -38,7 +38,7 @@ function changeCSS(row, column, answer) {
 					guessAutoCorrect.push(guessCount); // place the position of the guess in an array
 				};
 				if (guessCount == 5 && guessAutoCorrect.length == 1) { // if we've counted all the guesses and there is only one in the array
-					changeCSS(row, column, guessAutoCorrect[0]); // recurse the function to mark the guess as correct
+					userInput(row, column, guessAutoCorrect[0]); // recurse the function to mark the guess as correct
 				};
 			};
 		};

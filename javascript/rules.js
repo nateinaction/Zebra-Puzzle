@@ -23,13 +23,13 @@ function betweenClue() {
 			clueCenter = gameBoard[clueRow.center][clueColumn.center],
 			clueRight = gameBoard[clueRow.right][clueColumn.right];
 	if (solvableTile[clueRow.left][clueColumn.left] == true && solvableTile[clueRow.center][clueColumn.center] == true && solvableTile[clueRow.right][clueColumn.right] == true) {
-		checkPossibilities();
+//		checkPossibilities();
 	}
 	else {
 		$(".horizontalClueArea").append('<div class="horizontalClue"><div class="betweenClue" style="background-image:url(' + resources + 'clues/between.gif);"></div><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.center + '/' + clueCenter + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="clue"></div></div>');
 		clues.push(['between', clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight]);
 		clueNum++;
-		checkPossibilities();
+//		checkPossibilities();
 	};
 };
             
@@ -51,13 +51,13 @@ function directionClue() {
 	var clueLeft = gameBoard[clueRow.left][clueColumn.left],
 			clueRight = gameBoard[clueRow.right][clueColumn.right];
 	if (solvableTile[clueRow.left][clueColumn.left] == true && solvableTile[clueRow.right][clueColumn.right] == true) {
-		checkPossibilities();
+//		checkPossibilities();
 	}
 else {
 		$(".horizontalClueArea").append('<div class="horizontalClue"><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'clues/direction.gif);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="clue"></div></div>');
 		clues.push(['direction', clueRow.left, clueLeft, clueRow.right, clueRight]);
 		clueNum++;
-		checkPossibilities();
+//		checkPossibilities();
 	};
 };
             
@@ -89,13 +89,13 @@ function nearClue() {
 	var clueLeft = gameBoard[clueRow.left][clueColumn.left],
 			clueRight = gameBoard[clueRow.right][clueColumn.right];
 	if (solvableTile[clueRow.left][clueColumn.left] == true && solvableTile[clueRow.right][clueColumn.right] == true) {
-		checkPossibilities();
+//		checkPossibilities();
 	}
 	else {
 		$(".horizontalClueArea").append('<div class="horizontalClue"><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'clues/near.gif);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="clue"></div></div>');
 		clues.push(['near', clueRow.left, clueLeft, clueRow.right, clueRight]);
 		clueNum++;
-		checkPossibilities();
+//		checkPossibilities();
 	};
 };
             
@@ -118,13 +118,13 @@ function verticalClue() {
 	clueBottom = gameBoard[clueRow.bottom][clueColumn];
 						
 	if (solvableTile[clueRow.top][clueColumn] == true && solvableTile[clueRow.bottom][clueColumn] == true) {
-		checkPossibilities();
+//		checkPossibilities();
 	}
 	else {
 		$(".verticalClueArea").append('<div class="verticalClue"><div style="background-image:url(' + resources + 'row' + clueRow.top + '/' + clueTop + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.bottom + '/' + clueBottom + '.jpg);" class="clue"></div></div>')
 		clues.push(['vertical', clueRow.top, clueTop, clueRow.bottom, clueBottom]);
 		clueNum++;
-		checkPossibilities();
+//		checkPossibilities();
 	};          
 };
             
