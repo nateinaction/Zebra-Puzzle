@@ -4,9 +4,11 @@
 
 function randomizeAnswers() {
 	for (var row = 0; row <= puzzle.height; row++) {
-		puzzle.solved[row] = Array(); // setup an array to hold columns in each row
+		puzzle.solved[row] = Array(); // setup an array to hold random answers for each column in each row
+		solvableBlock[row] = Array(); // setup an array to hold solvable blocks for each column in each row
 		for (var column = 0; column <= puzzle.width; column++) {
 			var number = Math.floor(Math.random() * (puzzle.width + 1));
+			solvableBlock[row][column] = false; // set all blocks as not solvable.
 			if (puzzle.solved[row].indexOf(number) == -1) {
 				puzzle.solved[row][column] = number; // fill the column with a random answer between 0 and the puzzle width
 			}

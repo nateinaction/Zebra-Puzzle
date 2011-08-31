@@ -22,7 +22,7 @@ function betweenClue() {
 	var clueLeft = puzzle.solved[clueRow.left][clueColumn.left],
 			clueCenter = puzzle.solved[clueRow.center][clueColumn.center],
 			clueRight = puzzle.solved[clueRow.right][clueColumn.right];
-	if (solvableTile[clueRow.left][clueColumn.left] == true && solvableTile[clueRow.center][clueColumn.center] == true && solvableTile[clueRow.right][clueColumn.right] == true) {
+	if (solvableBlock[clueRow.left][clueColumn.left] == true && solvableBlock[clueRow.center][clueColumn.center] == true && solvableBlock[clueRow.right][clueColumn.right] == true) {
 //		checkPossibilities();
 	}
 	else {
@@ -50,7 +50,7 @@ function directionClue() {
 							
 	var clueLeft = puzzle.solved[clueRow.left][clueColumn.left],
 			clueRight = puzzle.solved[clueRow.right][clueColumn.right];
-	if (solvableTile[clueRow.left][clueColumn.left] == true && solvableTile[clueRow.right][clueColumn.right] == true) {
+	if (solvableBlock[clueRow.left][clueColumn.left] == true && solvableBlock[clueRow.right][clueColumn.right] == true) {
 //		checkPossibilities();
 	}
 else {
@@ -88,7 +88,7 @@ function nearClue() {
 
 	var clueLeft = puzzle.solved[clueRow.left][clueColumn.left],
 			clueRight = puzzle.solved[clueRow.right][clueColumn.right];
-	if (solvableTile[clueRow.left][clueColumn.left] == true && solvableTile[clueRow.right][clueColumn.right] == true) {
+	if (solvableBlock[clueRow.left][clueColumn.left] == true && solvableBlock[clueRow.right][clueColumn.right] == true) {
 //		checkPossibilities();
 	}
 	else {
@@ -117,7 +117,7 @@ function verticalClue() {
 	clueTop = puzzle.solved[clueRow.top][clueColumn];
 	clueBottom = puzzle.solved[clueRow.bottom][clueColumn];
 						
-	if (solvableTile[clueRow.top][clueColumn] == true && solvableTile[clueRow.bottom][clueColumn] == true) {
+	if (solvableBlock[clueRow.top][clueColumn] == true && solvableBlock[clueRow.bottom][clueColumn] == true) {
 //		checkPossibilities();
 	}
 	else {
