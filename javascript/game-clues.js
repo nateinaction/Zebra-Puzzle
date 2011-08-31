@@ -41,9 +41,9 @@ function betweenClue() {
 			clueRight = block.answer[clueRow.right][clueColumn.right];
 			
 	// check for repeating between clues
-	var tempArray = [clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight], repeat = false;
+	var tempArray = [clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight], tempArrayInverse = [clueRow.right, clueRight, clueRow.center, clueCenter, clueRow.left, clueLeft], repeat = false;
 	for (var x = 0; x < clues.between.length; x++) {
-		if (tempArray == clues.between[x]){
+		if (tempArray == clues.between[x] || tempArrayInverse == clues.between[x]){
 			repeat = true;
 		};
 	};
@@ -139,9 +139,9 @@ function nearClue() {
 			clueRight = block.answer[clueRow.right][clueColumn.right];
 			
 	// check for repeating near clues
-	var tempArray = [clueRow.left, clueLeft, clueRow.right, clueRight], repeat = false;
+	var tempArray = [clueRow.left, clueLeft, clueRow.right, clueRight], tempArrayInverse = [clueRow.right, clueRight, clueRow.left, clueLeft], repeat = false;
 	for (var x = 0; x < clues.near.length; x++) {
-		if (tempArray == clues.near[x]){
+		if (tempArray == clues.near[x] || tempArrayInverse == clues.near[x]){
 			repeat = true;
 		};
 	};
