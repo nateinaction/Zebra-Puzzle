@@ -49,7 +49,7 @@ function betweenClue() {
 	};
 	
 	if ((block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.center][clueColumn.center] == true && block.solvable[clueRow.right][clueColumn.right] == true) || repeat == true) {
-		randomClue(); // if all three blocks are solvable, we don't need another clue.
+		betweenClue(); // if all three blocks are solvable, we don't need another clue.
 	}
 	else {
 		clueNum++;
@@ -93,7 +93,7 @@ function directionalClue() {
 	};
 	
 	if ((block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.right][clueColumn.right] == true) || repeat == true) {
-		randomClue();
+		directionalClue();
 	}
 else {
 		clueNum++;
@@ -147,7 +147,7 @@ function nearClue() {
 	};
 	
 	if ((block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.right][clueColumn.right] == true) || repeat == true) {
-		randomClue();
+		nearClue();
 	}
 	else {
 		clueNum++;
@@ -191,7 +191,7 @@ function verticalClue() {
 	};
 	
 	if ((block.solvable[clueRow.top][clueColumn] == true && block.solvable[clueRow.bottom][clueColumn] == true) || repeat == true) {
-		randomClue();
+		verticalClue();
 	}
 	else {
 		clueNum++;
