@@ -30,7 +30,7 @@ function displayGameBoard() {
 			document.write('<div class="padding">');
 			for (var guess = 0; guess <= puzzle.width; guess++) {
 				document.write('<div id="' + row + column + guess + '" style="background-image:url(' + resources + 'row' + row + '/' + guess + '.jpg);" class="guess"></div>');
-				row + column + guess).click(function(x, y, z) {
+				$(row + column + guess).click(function(x, y, z) {
 					return function() {
 						userInput(x, y, z);
 					};
