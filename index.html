@@ -6,8 +6,9 @@
         <link href="./styles/computer.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
-		<script src="https://www.google.com/jsapi?key=ABQIAAAAFdti1WSalXCBvBGWG_B8yBTHTX3ap-9ER6gjhJqCFb29dttlmhQE4ZNjx_pdDznoaKE1sWujUJczZw"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<!--<script src="https://www.google.com/jsapi?key=ABQIAAAAFdti1WSalXCBvBGWG_B8yBTHTX3ap-9ER6gjhJqCFb29dttlmhQE4ZNjx_pdDznoaKE1sWujUJczZw"></script>-->
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>-->
+		<script src="./javascript/jquery-1.6.1.js"></script>
 		<script src="./javascript/jquery.rightClick.js"></script>
 		<script src="./javascript/game-board.js"></script>
 		<script src="./javascript/game-clues.js"></script>
@@ -15,8 +16,8 @@
 		<script language="JavaScript">
 // setup global variables
 		var puzzle = {
-					height : 2,
-					width : 5,
+					height : 3,
+					width : 6,
 					solvable : false,
 					solved : false
 				},
@@ -27,18 +28,29 @@
 				},
 				clues = {
 					between : Array(),
-					near : Array(),
 					directional : Array(),
-					vertical : Array()
+					near : Array(),
+					vertical : Array(),
+					// define maximum number of possible rules based on puzzle size
+					betweenMax : ((puzzle.height * puzzle.height) * puzzle.height) * (puzzle.width - 3),
+					directionalMax : directionalMax(),
+					nearMax : ((puzzle.width - 1) * puzzle.height) * puzzle.height,
+					verticalMax : puzzle.width * puzzle.height
 				},
 				clueNum = 0,
 				score = 0,
-				resources = "http://www.sheilacallaham.com/nate/einstein/images/";
+				//resources = "http://www.sheilacallaham.com/nate/einstein/images/";
+				resources = "./images/";
 
-		randomizeAnswers();
-		displayGameBoard();
-		for (var x=0;x<=27;x++){
-			randomClue();
+		if (puzzle.height >= 3 && puzzle.width >= 4) { // minimum puzzle size.
+			randomizeAnswers();
+			displayGameBoard();
+			for (var x=0;x<=27;x++){
+				randomClue();
+			};
+		}
+		else {
+			console.log("Puzzle size too small, please choose 3x4 or higher.");
 		};
 		</script>
 	</body>
