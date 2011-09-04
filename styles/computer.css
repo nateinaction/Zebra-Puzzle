@@ -33,14 +33,14 @@
     margin: 8px 0 8px 0;   
 }
 
-.guess {
+.possible {
     width: 16px;
     height: 16px;
     background-size: 16px auto;
     float: left;
 }
 
-.flagged {
+.impossible {
    opacity:0.3;
    filter:alpha(opacity=30);
 }

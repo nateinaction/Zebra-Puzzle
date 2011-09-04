@@ -13,6 +13,7 @@
 		<script src="./javascript/game-board.js"></script>
 		<script src="./javascript/game-clues.js"></script>
 		<script src="./javascript/user-input.js"></script>
+		<!-- <script src="./javascript/solvable-check.js"></script> -->
 		<script language="JavaScript">
 // setup global variables
 		var puzzle = {
@@ -21,11 +22,7 @@
 					solvable : false,
 					solved : false
 				},
-				block = {
-					answer : Array(),
-					solvable : Array(),
-					solved : Array()
-				},
+				block = Array(); // an object to hold the state of a block: solved, solvable, or unsolvable; and the tiles within a block. It can be accessed as block[row][column].state and block[row][column].tile[tile]
 				clues = {
 					between : Array(),
 					directional : Array(),
@@ -43,7 +40,7 @@
 				resources = "./images/";
 
 		if (puzzle.height >= 3 && puzzle.width >= 4) { // minimum puzzle size.
-			randomizeAnswers();
+			randomizeTiles();
 			displayGameBoard();
 			for (var x=0;x<=27;x++){
 				randomClue();
