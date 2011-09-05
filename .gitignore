@@ -3,3 +3,4 @@ styles/.DS_Store
 javascript/.DS_Store
 images/.DS_Store
 .gitignore
+javascript/game-board.js
