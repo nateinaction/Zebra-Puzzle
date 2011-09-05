@@ -7,6 +7,15 @@ function directionalMax() {
 	return directionalMax;
 };
 
+function validateTile(rowNumber, columnNumber, tileNumber) {
+	if (true == puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].answer.bool) {
+		return true;
+	}
+	else {
+		return false;
+	};
+};
+
 function randomClue() {
 	switch(Math.floor(Math.random() * 4)) {
 		case 0:
