@@ -7,6 +7,23 @@ function validateTile(rowNumber, columnNumber, tileNumber) {
 	};
 };
 
+function randomClue() {
+	switch(Math.floor(Math.random() * 4)) {
+		case 0:
+			new betweenClue();
+			break;
+		case 1:
+			new nearClue();
+			break;
+		case 2:
+			new directionalClue();
+			break;
+		case 3:
+			new verticalClue();
+			break;
+	};
+};
+
 function betweenClue() {
 	if (clues.between.length < clues.betweenMax) { // this is the maximum number of between clues possible.
 		var clueRow = Object(),
