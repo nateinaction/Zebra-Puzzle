@@ -9,7 +9,6 @@ function generateDirectionalClue(unsolvableTile) {
 						
 		// extract random unsolvable tile and use it as either the left or right clue
 		if (unsolvableTile.column == puzzle.width) {
-			console.log("right");
 			clueRow.right = unsolvableTile.row;
 			clueColumn.right = unsolvableTile.column;
 			
@@ -19,11 +18,8 @@ function generateDirectionalClue(unsolvableTile) {
 			while (clueColumn.right <= clueColumn.left) {
 				clueColumn.left = Math.floor(Math.random() * puzzle.width) + 1;
 			};
-			console.log(clueRow.left + ", " + clueColumn.left);
-			console.log(clueRow.right + ", " + clueColumn.right);
 		}
 		else if (unsolvableTile.column == 1) {
-			console.log("left");
 			clueRow.left = unsolvableTile.row;
 			clueColumn.left = unsolvableTile.column;
 			
@@ -33,11 +29,8 @@ function generateDirectionalClue(unsolvableTile) {
 			while (clueColumn.left >= clueColumn.right) {
 				clueColumn.right = Math.floor(Math.random() * puzzle.width) + 1;
 			};
-			console.log(clueRow.left + ", " + clueColumn.left);
-			console.log(clueRow.right + ", " + clueColumn.right);
 		}
 		else {
-			console.log("random");
 			var randomWing = Math.floor(Math.random() * 2);
 			
 			if (randomWing == 0) {
@@ -50,8 +43,6 @@ function generateDirectionalClue(unsolvableTile) {
 				while (clueColumn.right <= clueColumn.left) {
 					clueColumn.left = Math.floor(Math.random() * puzzle.width) + 1;
 				};
-				console.log(clueRow.left + ", " + clueColumn.left);
-				console.log(clueRow.right + ", " + clueColumn.right);
 			}
 			else {
 				clueRow.left = unsolvableTile.row;
@@ -63,8 +54,6 @@ function generateDirectionalClue(unsolvableTile) {
 				while (clueColumn.left >= clueColumn.right) {
 					clueColumn.right = Math.floor(Math.random() * puzzle.width) + 1;
 				};
-				console.log(clueRow.left + ", " + clueColumn.left);
-				console.log(clueRow.right + ", " + clueColumn.right);
 			};
 		};
 							

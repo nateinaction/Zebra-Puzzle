@@ -26,14 +26,14 @@ function randomClue(unsolvableTile) {
 		case 0:
 			new generateDirectionalClue(unsolvableTile);
 			break;
-//		case 1:
-		default:
+		case 1:
 			new generateVerticalClue(unsolvableTile);
 			break;
-/*		case 2:
+//		case 2:
+		default:
 			new nearClue(unsolvableTile);
 			break;
-		case 3:
+/*		case 3:
 			new betweenClue(unsolvableTile);
 			break; */
 	};
