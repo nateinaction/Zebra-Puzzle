@@ -1,12 +1,3 @@
-// define maximum number of possible rules based on puzzle size
-function directionalMax() {
-	var directionalMax = 0;
-	for (var x = 1; x < 5; x++) {
-		directionalMax += (x * 3) * 3;
-	};
-	return directionalMax;
-};
-
 function validateTile(rowNumber, columnNumber, tileNumber) {
 	if (true == puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].answer.bool) {
 		return true;
@@ -90,11 +81,7 @@ function betweenClue() {
 };
             
 function directionalClue() {
-	var directionalMax;
-	for (var x = 1; x < 5; x++) {
-		directionalMax += (x * 3) * 3;
-	};
-	if (clues.directional.length < clues.directionalMax) { // this is the maximum number of directional clues possible.
+	if (clues.directional.length < clues.directionalMax()) { // this is the maximum number of directional clues possible.
 		var clueRow = Object(),
 				clueColumn = Object();
 			
