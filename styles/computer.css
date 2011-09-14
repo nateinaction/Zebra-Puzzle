@@ -61,8 +61,8 @@
 }
 
 .correct {
-    width: 48px;
-    height: 48px;
+  width: 48px;
+  height: 48px;
 	background-size: 48px auto;
 	position: absolute;
 	margin-top: -8px;
