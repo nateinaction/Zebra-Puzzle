@@ -23,14 +23,14 @@ function randomUnsolvable() {
 // use random unsolvable tile in a random clue
 function randomClue(unsolvableTile) {
 	switch(Math.floor(Math.random() * 4)) {
-//		case 0:
-		default:
+		case 0:
 			new generateDirectionalClue(unsolvableTile);
 			break;
-/*		case 1:
-			new verticalClue(unsolvableTile);
+//		case 1:
+		default:
+			new generateVerticalClue(unsolvableTile);
 			break;
-		case 2:
+/*		case 2:
 			new nearClue(unsolvableTile);
 			break;
 		case 3:
