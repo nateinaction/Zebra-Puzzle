@@ -14,7 +14,9 @@
 	</head>
 	<body>
 	<script language="JavaScript">
-		// setup global variables
+		/* The Puzzle Object */
+		
+		// setup some variables and objects
 		var	puzzle = {
 					height : 3, // the height of the puzzle
 					width : 6, // the width of the puzzle
@@ -29,7 +31,14 @@
 					vertical : Array(),
 					// define maximum number of possible rules based on puzzle size
 					betweenMax : ((puzzle.height * puzzle.height) * puzzle.height) * (puzzle.width - 3),
-					directionalMax : directionalMax(),
+					directionalMax :
+						function directionalMax() {
+							var directionalMax = 0;
+							for (var x = 1; x < (puzzle.width - 1); x++) {
+								directionalMax += (x * puzzle.height) * puzzle.height;
+							};
+							return directionalMax;
+						},
 					nearMax : ((puzzle.width - 1) * puzzle.height) * puzzle.height,
 					verticalMax : puzzle.width * puzzle.height
 				},
@@ -37,24 +46,24 @@
 				score = 0,
 				resources = "./images/";
 
-		/* The Puzzle Object */
 		if (puzzle.height >= 3 && puzzle.width >= 4) { // minimum puzzle size.
 			document.write('<div class="board">');
 			document.write('<span id="score">0</span>');
 			for (var rowNumber = 1; rowNumber <= puzzle.height; rowNumber++) { // for all rows
 				puzzle.row[rowNumber] = {
 					column : Array(), // generate an array of columns
-					answer : Array() // generate an array of answers
+					answers : Array() // generate an array of answers
 				};
 				document.write('<div class="row">');
 				for (var columnNumber = 1; columnNumber <= puzzle.width; columnNumber++) { // for all columns
 					// create answers
-					var randomAnswer = Math.floor(Math.random() * puzzle.width); // generate a random answer to be used for the column
-					if (puzzle.row[rowNumber].answer.indexOf(randomAnswer) != -1) { // if the answer has already been used by another column in the row...
-						while (puzzle.row[rowNumber].answer.indexOf(randomAnswer) != -1) { // continue generating random answers until an unused answer is generated
-							randomAnswer = Math.floor(Math.random() * puzzle.width);
+					var randomAnswer = (Math.floor(Math.random() * puzzle.width)) + 1; // generate a random answer to be used for the column
+					if (puzzle.row[rowNumber].answers.indexOf(randomAnswer) != -1) { // if the answer has already been used by another column in the row...
+						while (puzzle.row[rowNumber].answers.indexOf(randomAnswer) != -1) { // continue generating random answers until an unused answer is generated
+							randomAnswer = (Math.floor(Math.random() * puzzle.width)) + 1;
 						};
 					};
+					puzzle.row[rowNumber].answers.push(randomAnswer);
 					// then...
 					puzzle.row[rowNumber].column[columnNumber] = {
 						solvable : { // set all columns as unsolvable
@@ -68,7 +77,7 @@
 						answer : randomAnswer, // placeholder for the column answer
 						tile : Array() // then generate an array of tiles
 					};
-					puzzle.row[rowNumber].answer[columnNumber] = puzzle.row[rowNumber].column[columnNumber].answer; // set all array elements in puzzle.answer to match puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solvable.bool
+					// puzzle.row[rowNumber].answer[columnNumber] = puzzle.row[rowNumber].column[columnNumber].answer; // set all array elements in puzzle.answer to match puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solvable.bool
 					puzzle.solvable[((rowNumber - 1) * puzzle.width) + columnNumber] = puzzle.row[rowNumber].column[columnNumber].solvable.bool; // set all array elements in puzzle.solvable to match puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solvable.bool 
 					puzzle.solved[((rowNumber - 1) * puzzle.width) + columnNumber] = puzzle.row[rowNumber].column[columnNumber].solved.bool; // set all array elements in puzzle.solved to match puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solved.bool
 					document.write('<div class="column">');
@@ -89,25 +98,35 @@
 							}
 						};
 						if (puzzle.row[rowNumber].column[columnNumber].answer == tileNumber) { // if this tile is the answer for the column
-							puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].string = 'correct'; // set the string of the tile as correct
-							puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].bool = 'true'; // set the boolean value of a correct tile as true
+							puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].answer.string = 'correct'; // set the string of the tile as correct
+							puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].answer.bool = true; // set the boolean value of a correct tile as true
 						};
 						document.write('<div id="' + rowNumber + columnNumber + tileNumber + '" style="background-image:url(' + resources + 'row' + rowNumber + '/' + tileNumber + '.jpg);" class="' + puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].flag.string + '"></div>');
-						$("#" + rowNumber + columnNumber + tileNumber).click(function(x, y, z) {
+						$("#" + rowNumber + columnNumber + tileNumber).click(function(rowNumber, columnNumber, tileNumber) {
 							return function() {
-								userInput(x, y, z);
+								userInput(rowNumber, columnNumber, tileNumber);
 							};
 						}(rowNumber, columnNumber, tileNumber));
-						$("#" + rowNumber + columnNumber + tileNumber).rightClick( function(e) {
+						function rightClick(rowNumber, columnNumber, tileNumber) {
+							console.log(event);
+						}
+						$("#" + rowNumber + columnNumber + tileNumber).rightClick( function(puzzle) {
 							if (this.hasClass("flagged") == true) {
 								$(this).removeClass("flagged");
-								puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].flag.string = 'unflagged';
-								puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].flag.bool = false;
+								console.log(event);
+								return function() {
+									puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].flag.string = 'unflagged';
+									puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].flag.bool = false;
+									console.log(puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].flag.string);
+								};
 							}
 							else if (this.hasClass("unflagged") == true && this.hasClass("correct") == false) {
 								$(this).addClass("flagged");
-								puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].flag.string = 'flagged';
-								puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].flag.bool = true;
+								return function() {
+									puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].flag.string = 'flagged';
+									puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].flag.bool = true;
+									console.log(puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].flag.string);
+								};
 							};
 						});
 					};
@@ -115,14 +134,19 @@
 					document.write('</div>');
 				};
 				document.write('</div>');
+				console.log(puzzle.row[rowNumber].answers);
 			};
 			document.write('</div>');
 			document.write('<div class="horizontalClueArea"></div>');
 			document.write('<div class="verticalClueArea"></div>');
 			
+			for (false in puzzle.row[1].column[1].solvable.bool) {
+				console.log('test');
+			}
+			
 			// generate clues
 			for (var x=0;x<=27;x++){
-				randomClue();
+				//randomClue();
 			};
 		}
 		else {
