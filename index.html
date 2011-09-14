@@ -10,6 +10,7 @@
 				<script src="./javascript/jquery.rightClick.js"></script>
 				<script src="./javascript/game-clues.js"></script>
 				<script src="./javascript/user-input.js"></script>
+				<script src="./javascript/clues/directional-clues.js"></script>
 				<!-- <script src="./javascript/solvable-check.js"></script> -->
 	</head>
 	<body>
@@ -21,7 +22,7 @@
 					height : 3, // the height of the puzzle
 					width : 6, // the width of the puzzle
 					row : Array(), // generate an array of rows
-					solvable : Array(), // generate an array filled with all puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solvable.bool
+					solvable : false, // set the puzzle as not solvable
 					solved : Array() // generate an array filled with all puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solved.bool
 				},
 				clues = {
@@ -78,7 +79,7 @@
 						tile : Array() // then generate an array of tiles
 					};
 					// puzzle.row[rowNumber].answer[columnNumber] = puzzle.row[rowNumber].column[columnNumber].answer; // set all array elements in puzzle.answer to match puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solvable.bool
-					puzzle.solvable[((rowNumber - 1) * puzzle.width) + columnNumber] = puzzle.row[rowNumber].column[columnNumber].solvable.bool; // set all array elements in puzzle.solvable to match puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solvable.bool 
+					// puzzle.solvable[((rowNumber - 1) * puzzle.width) + columnNumber] = puzzle.row[rowNumber].column[columnNumber].solvable.bool; // set all array elements in puzzle.solvable to match puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solvable.bool 
 					puzzle.solved[((rowNumber - 1) * puzzle.width) + columnNumber] = puzzle.row[rowNumber].column[columnNumber].solved.bool; // set all array elements in puzzle.solved to match puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solved.bool
 					document.write('<div class="column">');
 					document.write('<div class="padding">');
@@ -153,5 +154,6 @@
 			console.log("Puzzle size too small, please choose 3x4 or higher.");
 		};
 		</script>
+		<script src="./javascript/clues/clue-engine.js"></script>
 	</body>
 </html>
