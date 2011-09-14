@@ -29,13 +29,12 @@ function randomClue(unsolvableTile) {
 		case 1:
 			new generateVerticalClue(unsolvableTile);
 			break;
-//		case 2:
-		default:
-			new nearClue(unsolvableTile);
+		case 2:
+			new generateNearClue(unsolvableTile);
 			break;
-/*		case 3:
-			new betweenClue(unsolvableTile);
-			break; */
+		case 3: 
+			new generateBetweenClue(unsolvableTile);
+			break;
 	};
 };
 

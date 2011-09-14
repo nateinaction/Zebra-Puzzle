@@ -1,4 +1,4 @@
-function nearClue(unsolvableTile) {
+function generateNearClue(unsolvableTile) {
 	if (clues.near.length < clues.nearMax) { // this is the maximum number of near clues possible.
 		var clueRow = Object(),
 				clueColumn = Object(),
