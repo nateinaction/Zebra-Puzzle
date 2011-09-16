@@ -1,7 +1,7 @@
 @author Nate Gay @thenatedanger
 @copyright 2011 Nate Gay
 @licence GPLv3 <http://www.gnu.org/licenses/gpl.html>
-@version 0.02
+@version 0.03
 
 ABOUT:
 The Zebra puzzle, also known as Einstein's Puzzle or Einstein's Riddle, is a game for which is primarily solved through the application of deductive reasoning and cognitive mapping.
@@ -9,7 +9,6 @@ http://en.wikipedia.org/wiki/Deductive_reasoning
 http://en.wikipedia.org/wiki/Cognitive_map
 
 PROJECT DIRECTION:
-* CRITICAL: I would like to stop generating clues when the puzzle is solvable.
 * HIGH: I would like to visually indicate to the player whether they've selected a correct or incorrect answer.
 * HIGH: I would like to congratulate a player who has successfully completed a puzzle with some fuzzy warm feelings and a summary of their score.
 * MEDIUM: I would like to add a way of tracking scores, preferably through a social network tie-in like facebook or google plus.
@@ -18,15 +17,17 @@ PROJECT DIRECTION:
 * LOW: I would like to reward a player who has no incorrect guesses in a block.
 
 VERSION HISTORY:
-* 0.02: Clues are no longer allowed to repeat, clues now fail with console message when maximum number of possible clues is reached.
-* 0.01: Rewrote code in accordance with project appendix, clues can now be flagged.
-* 0.00: Fixed some spacing issues and testing git push.
+* 0.03:	Clues automatically generate until the puzzle is solvable.
+* 0.02:	Clues are no longer allowed to repeat, clues now fail with console message when maximum number of possible clues is reached. The puzzle
+				only generates if a minimum puzzle size of 3x4 is reached.
+* 0.01:	Rewrote code in accordance with project appendix, clues can now be flagged.
+* 0.00:	Fixed some spacing issues and testing git push.
 
 PROJECT APPENDIX:
-* game board: The game board is the playing surface. It contains multiple rows and columns of blocks as well as all the clues.
-* block: A block is single square on the game board. It can either be solved, consisting of a single tile, or unsolved, consisting of 6 small tiles. Blocks can also be solvable and unsolvable based on the available clues.
-* tile: A tile is a playing piece on the game board. It can be shown to the player in four distinct ways: unsolved, solved, flagged, and incorrect.
-* flagged: A flagged tile or clue will become translucent on right click. Only tiles and clues can be flagged.
-* clue: A clue is a hint as to the location of a tile. There are four types of clues between, near, directional, and vertical. Clues can be flagged or unflagged.
+* GAME BOARD: The game board is the playing surface. It contains multiple rows and columns of blocks as well as all the clues.
+* BLOCK: A block is single square on the game board. Blocks can be SOLVED consisting of a single correct tile, SOLVABLE consisting of all possible, impossible, and incorrect tiles, or UNSOLVABLE if the available clues do not provide enough information to solve the block.
+* TILE: A tile is an object which resides in a block. It can be shown to the player in four distinct ways: TRUE when a tile is the correct answer in a block, FALSE when a tile is the incorrect answer in a block, FLAGGED-POSSIBLE when a tile is not flagged as an impossible answer in an unsolved block, and FLAGGED-IMPOSSIBLE when a tile is flagged as an impossible answer in an unsolved block.
+* FLAGGED: A flagged tile or clue will become translucent on right click. Only tiles and clues can be flagged.
+* CLUE: A clue is a hint as to the location of a tile. There are four types of clues between, near, directional, and vertical. Clues can be flagged or unflagged.
 * game-board.js: The purpose of game-board.js is to randomize the answers, validate answers, and setup the HTML elements that make up the game board.
 * user-input.js: The purpose of user-input.js is to process left clicks from the user into any CSS, score, or other game related changes.

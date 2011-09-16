@@ -29,11 +29,18 @@
     border: 1px solid;   
 }
 
+.tile {
+    height: 48px;
+    width: 48px;
+    float: left;
+    background-size: 48px auto;
+}
+
 .padding {
     margin: 8px 0 8px 0;   
 }
 
-.guess {
+.unflagged {
     width: 16px;
     height: 16px;
     background-size: 16px auto;
@@ -59,13 +66,6 @@
 	background-size: 48px auto;
 	position: absolute;
 	margin-top: -8px;
-}
-
-.clue {
-    height: 48px;
-    width: 48px;
-    float: left;
-    background-size: 48px auto;
 }
 
 .horizontalClue {

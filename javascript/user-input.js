@@ -1,44 +1,52 @@
-function userInput(row, column, answer) {
-	if ($("#" + row + column + answer).hasClass("correct") == false) {
-		var answerBool = validateAnswer(row, column, answer); // is answer correct or incorrect?
-		if (answerBool == true) { // if answer is correct
-			$("#" + row + column + answer).removeClass("guess").removeClass("invisible").addClass("correct"); // mark the answer as correct
-			$("#score").html(score += 5); // and add to the score
-			for (var clean = 0; clean <= 5; clean++) { // then check all columns in the row
-				if (column == clean) { // if the column we are checking contains the correct answer
-					for (var cleanIncorrectGuesses = 0; cleanIncorrectGuesses <= 5; cleanIncorrectGuesses++) { // check all guesses in a column
-						if (cleanIncorrectGuesses != answer && $("#" + row + column + cleanIncorrectGuesses).hasClass("incorrect") == false) { // if the guess we are checking does not match the correct answer and also is not marked as incorrect
-							$("#" + row + column + cleanIncorrectGuesses).removeClass("guess").addClass("incorrect"); // mark the guess as incorrect
+function userInput(rowNumber, columnNumber, tileNumber) {
+	if (puzzle.row[rowNumber].column[columnNumber].solved.bool == false) { // if the tile has not been solved
+		if (puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].answer.bool == true) { // and the answer is correct
+			console.log("correct");
+			$("#" + rowNumber + columnNumber + tileNumber).removeClass("possible").removeClass("impossible").addClass("correct"); // mark the answer as correct
+			$("#score").html(score += 5); // add to the score
+			puzzle.row[rowNumber].column[columnNumber].solved.string = 'solved'; // and mark the block as solvable in the array
+			puzzle.row[rowNumber].column[columnNumber].solved.bool = true;
+			for (var clean = 1; clean <= 6; clean++) { // then check all columns in the row
+				if (columnNumber == clean) { // if the column we are checking contains the correct answer
+					for (var cleanIncorrectGuesses = 1; cleanIncorrectGuesses <= 6; cleanIncorrectGuesses++) { // check all guesses in a column
+						if (cleanIncorrectGuesses != tileNumber && $("#" + rowNumber + columnNumber + cleanIncorrectGuesses).hasClass("incorrect") == false) { // if the guess we are checking does not match the correct answer and also is not marked as incorrect
+							$("#" + rowNumber + columnNumber + cleanIncorrectGuesses).removeClass("possible").addClass("incorrect"); // mark the guess as incorrect
+							puzzle.row[rowNumber].column[clean].tile[tileNumber].possible.string = 'impossible';
+							puzzle.row[rowNumber].column[clean].tile[tileNumber].possible.bool = false;
 						};
 					};
 				}
-				else { // if the column we are checking does not contain the correct answer
-					$("#" + row + clean + answer).removeClass("guess").addClass("incorrect"); // mark the incorrect answer as incorrect
+				else { // if the tile we are checking is not the correct tile
+					$("#" + rowNumber + clean + tileNumber).removeClass("possible").addClass("incorrect"); // mark the tile as incorrect
+					puzzle.row[rowNumber].column[clean].tile[tileNumber].possible.string = 'impossible';
+					puzzle.row[rowNumber].column[clean].tile[tileNumber].possible.bool = false;
 			     /* if there is only one guess left in the column, mark it as correct */
 					var guessAutoCorrect = new Array();
-					for (var guessCount = 0; guessCount <= 5; guessCount++) { // check all guesses in a column
-						if ($("#" + row + clean + guessCount).hasClass("guess") == true) { // if there is a guess in the column we are checking
+					for (var guessCount = 1; guessCount <= 6; guessCount++) { // check all guesses in a column
+						if (puzzle.row[rowNumber].column[clean].tile[guessCount].possible.bool == true) { // if there is a possible tile in the column we are checking
 							guessAutoCorrect.push(guessCount); // place the position of the guess in an array
 						};
-						if (guessCount == 5 && guessAutoCorrect.length == 1) { // if we've counted all the guesses and there is only one in the array
-						userInput(row, clean, guessAutoCorrect[0]); // recurse the function to mark the guess as correct
+						if (guessCount == 6 && guessAutoCorrect.length == 1) { // if we've counted all the guesses and there is only one in the array
+							userInput(rowNumber, clean, guessAutoCorrect[0]); // recurse the function to mark the guess as correct
+						};
 					};
 				};
 			};
-		};
-	}
-	else { // if answer is incorrect
-		$("#" + row + column + answer).removeClass("guess").addClass("incorrect"); // mark the guess as incorrect
-		$("#score").html(score -= 1); // remove from the score
-		/* if there is only one guess left in the column, mark it as correct */
-		var guessAutoCorrect = new Array();
-		for (var guessCount = 0; guessCount <= 5; guessCount++) { // check all guesses in a column
-			if (
-				$("#" + row + column + guessCount).hasClass("guess") == true) { // if there is a guess in the column we are checking
+		}
+		else { // if answer is incorrect
+			console.log("incorrect");
+			$("#" + rowNumber + columnNumber + tileNumber).removeClass("possible").addClass("incorrect"); // mark the guess as incorrect
+			puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].possible.string = 'impossible';
+			puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].possible.bool = false;
+			$("#score").html(score -= 1); // remove from the score
+			/* if there is only one guess left in the column, mark it as correct */
+			var guessAutoCorrect = new Array();
+			for (var guessCount = 1; guessCount <= 6; guessCount++) { // check all guesses in a column
+				if (puzzle.row[rowNumber].column[columnNumber].tile[guessCount].possible.bool == true) { // if there is a possible tile in the column we are checking
 					guessAutoCorrect.push(guessCount); // place the position of the guess in an array
 				};
-				if (guessCount == 5 && guessAutoCorrect.length == 1) { // if we've counted all the guesses and there is only one in the array
-					userInput(row, column, guessAutoCorrect[0]); // recurse the function to mark the guess as correct
+				if (guessCount == 6 && guessAutoCorrect.length == 1) { // if we've counted all the guesses and there is only one in the array
+					userInput(rowNumber, columnNumber, guessAutoCorrect[0]); // recurse the function to mark the guess as correct
 				};
 			};
 		};
