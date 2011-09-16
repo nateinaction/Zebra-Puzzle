@@ -1,10 +1,10 @@
-// define maximum number of possible rules based on puzzle size
-function directionalMax() {
-	var directionalMax = 0;
-	for (var x = 1; x < 5; x++) {
-		directionalMax += (x * 3) * 3;
+function validateTile(rowNumber, columnNumber, tileNumber) {
+	if (true == puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].answer.bool) {
+		return true;
+	}
+	else {
+		return false;
 	};
-	return directionalMax;
 };
 
 function randomClue() {
@@ -46,9 +46,9 @@ function betweenClue() {
 			clueColumn.right = clueColumn.center + 1;
 		};
                 
-		var clueLeft = block.answer[clueRow.left][clueColumn.left],
-				clueCenter = block.answer[clueRow.center][clueColumn.center],
-				clueRight = block.answer[clueRow.right][clueColumn.right];
+		var clueLeft = block[clueRow.left][clueColumn.left].answer,
+				clueCenter = block[clueRow.center][clueColumn.center].answer,
+				clueRight = block[clueRow.right][clueColumn.right].answer;
 			
 		// check for repeating between clues
 		var tempArray = JSON.stringify([clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight]), tempArrayInverse = JSON.stringify([clueRow.right, clueRight, clueRow.center, clueCenter, clueRow.left, clueLeft]), repeat = false; // this is the maximum number of between clues possible without repeating.
@@ -58,18 +58,18 @@ function betweenClue() {
 			};
 		};
 	
-		if ((block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.center][clueColumn.center] == true && block.solvable[clueRow.right][clueColumn.right] == true) || repeat == true) {
+		if ((block[clueRow.left][clueColumn.left].state == 'solvable' && block[clueRow.center][clueColumn.center].state == 'solvable' && block[clueRow.right][clueColumn.right].state == 'solvable') || repeat == true) {
 			randomClue(); // if all three blocks are solvable, we don't need another clue.
 		}
 		else {
 			clueNum++;
 			$(".horizontalClueArea").append('<div class="horizontalClue clue' + clueNum + '"><div class="betweenClue" style="background-image:url(' + resources + 'clues/between.gif);"></div><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.center + '/' + clueCenter + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="clue"></div></div>');
 			$(".clue" + clueNum).rightClick( function(e) {
-				if (this.hasClass("flagged") == true) {
-					$(this).removeClass("flagged");
+				if (this.hasClass("impossible") == true) {
+					$(this).removeClass("impossible");
 				}
-				else if (this.hasClass("flagged") == false) {
-					$(this).addClass("flagged");
+				else if (this.hasClass("impossible") == false) {
+					$(this).addClass("impossible");
 				};
 			});
 			clues.between.push([clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight]);
@@ -81,11 +81,7 @@ function betweenClue() {
 };
             
 function directionalClue() {
-	var directionalMax;
-	for (var x = 1; x < 5; x++) {
-		directionalMax += (x * 3) * 3;
-	};
-	if (clues.directional.length < clues.directionalMax) { // this is the maximum number of directional clues possible.
+	if (clues.directional.length < clues.directionalMax()) { // this is the maximum number of directional clues possible.
 		var clueRow = Object(),
 				clueColumn = Object();
 			
@@ -100,8 +96,8 @@ function directionalClue() {
 			clueColumn.right = Math.floor(Math.random() * puzzle.width);
 		};
 							
-		var clueLeft = block.answer[clueRow.left][clueColumn.left],
-				clueRight = block.answer[clueRow.right][clueColumn.right];
+		var clueLeft = block[clueRow.left][clueColumn.left].answer,
+				clueRight = block[clueRow.right][clueColumn.right].answer;
 
 		// check for repeating directional clues
 		var tempArray = JSON.stringify([clueRow.left, clueLeft, clueRow.right, clueRight]), repeat = false;
@@ -111,18 +107,18 @@ function directionalClue() {
 			};
 		};
 	
-		if ((block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.right][clueColumn.right] == true) || repeat == true) {
+		if ((block[clueRow.left][clueColumn.left].state == 'solvable' && block[clueRow.right][clueColumn.right].state == 'solvable') || repeat == true) {
 			randomClue();
 		}
 		else {
 			clueNum++;
 			$(".horizontalClueArea").append('<div class="horizontalClue clue' + clueNum + '"><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'clues/direction.gif);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="clue"></div></div>');
 			$(".clue" + clueNum).rightClick( function(e) {
-				if (this.hasClass("flagged") == true) {
-					$(this).removeClass("flagged");
+				if (this.hasClass("impossible") == true) {
+					$(this).removeClass("impossible");
 				}
-				else if (this.hasClass("flagged") == false) {
-					$(this).addClass("flagged");
+				else if (this.hasClass("impossible") == false) {
+					$(this).addClass("impossible");
 				};
 			});
 			clues.directional.push([clueRow.left, clueLeft, clueRow.right, clueRight]);
@@ -159,8 +155,8 @@ function nearClue() {
 			};
 		};
 
-		var clueLeft = block.answer[clueRow.left][clueColumn.left],
-				clueRight = block.answer[clueRow.right][clueColumn.right];
+		var clueLeft = block[clueRow.left][clueColumn.left].answer,
+				clueRight = block[clueRow.right][clueColumn.right].answer;
 			
 		// check for repeating near clues
 		var tempArray = JSON.stringify([clueRow.left, clueLeft, clueRow.right, clueRight]), tempArrayInverse = JSON.stringify([clueRow.right, clueRight, clueRow.left, clueLeft]), repeat = false;
@@ -170,18 +166,18 @@ function nearClue() {
 			};
 		};
 	
-		if ((block.solvable[clueRow.left][clueColumn.left] == true && block.solvable[clueRow.right][clueColumn.right] == true) || repeat == true) {
+		if ((block[clueRow.left][clueColumn.left].state == 'solvable' && block[clueRow.right][clueColumn.right].state == 'solvable') || repeat == true) {
 		randomClue();
 		}
 		else {
 			clueNum++;
 			$(".horizontalClueArea").append('<div class="horizontalClue clue' + clueNum + '"><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'clues/near.gif);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="clue"></div></div>');
 			$(".clue" + clueNum).rightClick( function(e) {
-				if (this.hasClass("flagged") == true) {
-					$(this).removeClass("flagged");
+				if (this.hasClass("impossible") == true) {
+					$(this).removeClass("impossible");
 				}
-				else if (this.hasClass("flagged") == false) {
-					$(this).addClass("flagged");
+				else if (this.hasClass("impossible") == false) {
+					$(this).addClass("impossible");
 				};
 			});
 			clues.near.push([clueRow.left, clueLeft, clueRow.right, clueRight]);
@@ -208,8 +204,8 @@ function verticalClue() {
 		// randomly select column
 		clueColumn = Math.floor(Math.random() * puzzle.width);
 
-		clueTop = block.answer[clueRow.top][clueColumn];
-		clueBottom = block.answer[clueRow.bottom][clueColumn];
+		clueTop = block[clueRow.top][clueColumn].answer;
+		clueBottom = block[clueRow.bottom][clueColumn].answer;
 
 		// check for repeating vertical clues
 		var tempArray = JSON.stringify([clueRow.top, clueTop, clueRow.bottom, clueBottom]), repeat = false;
@@ -219,18 +215,18 @@ function verticalClue() {
 			};
 		};
 	
-		if ((block.solvable[clueRow.top][clueColumn] == true && block.solvable[clueRow.bottom][clueColumn] == true) || repeat == true) {
+		if ((block[clueRow.top][clueColumn].state == 'solvable' && block[clueRow.bottom][clueColumn].state == 'solvable') || repeat == true) {
 			randomClue();
 		}
 		else {
 			clueNum++;
-			$(".verticalClueArea").append('<div class="verticalClue clue' + clueNum + '"><div style="background-image:url(' + resources + 'row' + clueRow.top + '/' + clueTop + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.bottom + '/' + clueBottom + '.jpg);" class="clue"></div></div>')
+			$(".verticalClueArea").append('<div class="verticalClue clue' + clueNum + '"><div style="background-image:url(' + resources + 'row' + clueRow.top + '/' + clueTop + '.jpg);" class="clue"></div><div style="background-image:url(' + resources + 'row' + clueRow.bottom + '/' + clueBottom + '.jpg);" class="clue"></div></div>');
 			$(".clue" + clueNum).rightClick( function(e) {
-				if (this.hasClass("flagged") == true) {
-					$(this).removeClass("flagged");
+				if (this.hasClass("impossible") == true) {
+					$(this).removeClass("impossible");
 				}
-				else if (this.hasClass("flagged") == false) {
-					$(this).addClass("flagged");
+				else if (this.hasClass("impossible") == false) {
+					$(this).addClass("impossible");
 				};
 			});
 			clues.vertical.push([clueRow.top, clueTop, clueRow.bottom, clueBottom]);
