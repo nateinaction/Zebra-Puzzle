@@ -62,7 +62,7 @@ function generateDirectionalClue(unsolvableTile) {
 
 		// check for repeating directional clues
 		var tempArray = JSON.stringify([clueRow.left, clueLeft, clueRow.right, clueRight]), repeat = false;
-		for (var x = 0; x < clues.directional.length; x++) {
+		for (var x = 0, max = clues.directional.length; x < max; x++) {
 			if (tempArray == JSON.stringify(clues.directional[x])){
 				repeat = true;
 			};
@@ -84,6 +84,8 @@ function generateDirectionalClue(unsolvableTile) {
 				};
 			});
 			clues.directional.push([clueRow.left, clueLeft, clueRow.right, clueRight]);
+			puzzle.row[clueRow.left].column[clueColumn.left].solvable.bool = true;
+			puzzle.row[clueRow.right].column[clueColumn.right].solvable.bool = true;
 		};
 	}
 	else {

@@ -6,9 +6,8 @@
         <link href="./styles/computer.css" rel="stylesheet" type="text/css">
 				<!--<script src="https://www.google.com/jsapi?key=ABQIAAAAFdti1WSalXCBvBGWG_B8yBTHTX3ap-9ER6gjhJqCFb29dttlmhQE4ZNjx_pdDznoaKE1sWujUJczZw"></script>-->
 				<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>-->
-				<script src="./javascript/jquery-1.6.1.js"></script>
-				<script src="./javascript/jquery.rightClick.js"></script>
-				<script src="./javascript/game-clues.js"></script>
+				<script src="./javascript/resources/jquery-1.6.1.js"></script>
+				<script src="./javascript/resources/jquery.rightClick.js"></script>
 				<script src="./javascript/user-input.js"></script>
 				<script src="./javascript/clues/directional-clues.js"></script>
 				<script src="./javascript/clues/vertical-clues.js"></script>
@@ -46,6 +45,9 @@
 					nearMax : ((puzzle.width - 1) * puzzle.height) * puzzle.height,
 					verticalMax : puzzle.width * puzzle.height
 				},
+				answers = {
+					row : Array()
+				},
 				clueNumber = 0,
 				score = 0,
 				resources = "./images/";
@@ -57,6 +59,9 @@
 				puzzle.row[rowNumber] = {
 					column : Array(), // generate an array of columns
 					answers : Array() // generate an array of answers
+				};
+				answers.row[rowNumber] = {
+					column : Array(), // generate an array of columns
 				};
 				document.write('<div class="row">');
 				for (var columnNumber = 1; columnNumber <= puzzle.width; columnNumber++) { // for all columns
@@ -80,6 +85,13 @@
 						},
 						answer : randomAnswer, // placeholder for the column answer
 						tile : Array() // then generate an array of tiles
+//						clued : { bool : false }
+					};
+					answers.row[rowNumber].column[columnNumber] = {
+						above : Array(), // generate an array of columns
+						below : Array(),
+						right : Array(),
+						left : Array()
 					};
 					// puzzle.row[rowNumber].answer[columnNumber] = puzzle.row[rowNumber].column[columnNumber].answer; // set all array elements in puzzle.answer to match puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solvable.bool
 					// puzzle.solvable[((rowNumber - 1) * puzzle.width) + columnNumber] = puzzle.row[rowNumber].column[columnNumber].solvable.bool; // set all array elements in puzzle.solvable to match puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solvable.bool 
@@ -143,20 +155,11 @@
 			document.write('</div>');
 			document.write('<div class="horizontalClueArea"></div>');
 			document.write('<div class="verticalClueArea"></div>');
-			
-			for (false in puzzle.row[1].column[1].solvable.bool) {
-				console.log('test');
-			}
-			
-			// generate clues
-			for (var x=0;x<=27;x++){
-				//randomClue();
-			};
 		}
 		else {
 			console.log("Puzzle size too small, please choose 3x4 or higher.");
 		};
 		</script>
-		<script src="./javascript/clues/clue-engine.js"></script>
+		<script src="./javascript/clue-engine.js"></script>
 	</body>
 </html>

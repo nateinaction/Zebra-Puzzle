@@ -41,11 +41,17 @@ function generateNearClue(unsolvableTile) {
 		else {
 			var clueLeft = puzzle.row[clueRow.right].column[clueColumn.right].answer,
 					clueRight = puzzle.row[clueRow.left].column[clueColumn.left].answer;
+			clueRow.temp = clueRow.left;
+			clueRow.left = clueRow.right;
+			clueRow.right = clueRow.temp;
+			clueColumn.temp = clueColumn.left;
+			clueColumn.left = clueColumn.right;
+			clueColumn.right = clueColumn.temp;
 		};
 			
 		// check for repeating near clues
 		var tempArray = JSON.stringify([clueRow.left, clueLeft, clueRow.right, clueRight]), tempArrayInverse = JSON.stringify([clueRow.right, clueRight, clueRow.left, clueLeft]), repeat = false;
-		for (var x = 0; x < clues.near.length; x++) {
+		for (var x = 0, max = clues.near.length; x < max; x++) {
 			if (tempArray == JSON.stringify(clues.near[x]) || tempArrayInverse == JSON.stringify(clues.near[x])){
 				repeat = true;
 			};
@@ -63,6 +69,8 @@ function generateNearClue(unsolvableTile) {
 				};
 			});
 			clues.near.push([clueRow.left, clueLeft, clueRow.right, clueRight]);
+			puzzle.row[clueRow.left].column[clueColumn.left].solvable.bool = true;
+			puzzle.row[clueRow.right].column[clueColumn.right].solvable.bool = true;
 		};
 	}
 	else {

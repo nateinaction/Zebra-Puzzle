@@ -50,13 +50,13 @@ function solvableCheck() {
 	var recheck = false;
 	for (var column = 0; column < puzzle.width; column++) { // for every column
 		// vertical clues get checked
-		for (var possibilities = 0; possibilities < clues.vertical.length; possibilities++) { // for every vertical clue
+		for (var possibilities = 0, max = clues.vertical.length; possibilities < max; possibilities++) { // for every vertical clue
 			var clueRow = Object(),
 					clueAnswer = Object();
                                 
-			clueRow.top = clues.vertical[possibilities][0],
-			clueAnswer.top = clues.vertical[possibilities][1],
-			clueRow.bottom = clues.vertical[possibilities][2],
+			clueRow.top = clues.vertical[possibilities][0];
+			clueAnswer.top = clues.vertical[possibilities][1];
+			clueRow.bottom = clues.vertical[possibilities][2];
 			clueAnswer.bottom = clues.vertical[possibilities][3];
 
 			if (isPossible(clueRow.top, column, clueAnswer.top) == false && isPossible(clueRow.bottom, column, clueAnswer.bottom) == true) {
@@ -69,7 +69,7 @@ function solvableCheck() {
 			};
 		};
 		// near clues get checked
-		for (var possibilities = 0; possibilities < clues.near.length; possibilities++) { // for every near clue
+		for (var possibilities = 0, max = clues.near.length; possibilities < max; possibilities++) { // for every near clue
 			var clueRow = Object(),
 					clueAnswer = Object();
                                 
@@ -116,7 +116,7 @@ function solvableCheck() {
 			};
 		};
 		// directional clues get checked
-		for (var possibilities = 0; possibilities < clues.directional.length; possibilities++) { // for every directional clue
+		for (var possibilities = 0, max = clues.directional.length; possibilities < max; possibilities++) { // for every directional clue
 			var clueRow = Object(),
 					clueAnswer = Object();
 
@@ -149,7 +149,7 @@ r:		if (isPossible(clueRow.left, column, clueAnswer.left) == true && (column - 1
 			};
 		};
 		// between clues get checked
-		for (var possibilities = 0; possibilities < clues.between.length; possibilities++) { // for every between clue
+		for (var possibilities = 0, max = clues.between.length; possibilities < max; possibilities++) { // for every between clue
 			var clueRow = Object(),
 					clueAnswer = Object();
 

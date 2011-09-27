@@ -45,7 +45,7 @@ function generateVerticalClue(unsolvableTile) {
 
 		// check for repeating vertical clues
 		var tempArray = JSON.stringify([clueRow.top, clueTop, clueRow.bottom, clueBottom]), repeat = false;
-		for (var x = 0; x < clues.vertical.length; x++) {
+		for (var x = 0, max = clues.vertical.length; x < max; x++) {
 			if (tempArray == JSON.stringify(clues.vertical[x])){
 				repeat = true;
 			};
@@ -63,6 +63,8 @@ function generateVerticalClue(unsolvableTile) {
 				};
 			});
 			clues.vertical.push([clueRow.top, clueTop, clueRow.bottom, clueBottom]);
+			puzzle.row[clueRow.top].column[unsolvableTile.column].solvable.bool = true;
+			puzzle.row[clueRow.bottom].column[unsolvableTile.column].solvable.bool = true;
 		};
 	}
 	else {

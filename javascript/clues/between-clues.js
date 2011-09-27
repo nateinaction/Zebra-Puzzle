@@ -63,18 +63,20 @@ function generateBetweenClue(unsolvableTile) {
 			clueRow.temp = clueRow.left;
 			clueRow.left = clueRow.right;
 			clueRow.right = clueRow.temp;
+			clueColumn.temp = clueColumn.left;
+			clueColumn.left = clueColumn.right;
+			clueColumn.right = clueColumn.temp;
 		};
 			
 		// check for repeating between clues
 		var tempArray = JSON.stringify([clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight]), tempArrayInverse = JSON.stringify([clueRow.right, clueRight, clueRow.center, clueCenter, clueRow.left, clueLeft]), repeat = false; // this is the maximum number of between clues possible without repeating.
-		for (var x = 0; x < clues.between.length; x++) {
+		for (var x = 0, max = clues.between.length; x < max; x++) {
 			if (tempArray == JSON.stringify(clues.between[x]) || tempArrayInverse == JSON.stringify(clues.between[x])){
 				repeat = true;
 			};
 		};
 	
 		if (repeat == false) {
-			console.log("between");
 			clueNumber++;
 			$(".horizontalClueArea").append('<div class="horizontalClue clue' + clueNumber + '"><div class="betweenClue" style="background-image:url(' + resources + 'clues/between.gif);"></div><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'row' + clueRow.center + '/' + clueCenter + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="tile"></div></div>');
 			$(".clue" + clueNumber).rightClick( function(e) {
@@ -85,7 +87,11 @@ function generateBetweenClue(unsolvableTile) {
 					$(this).addClass("flagged");
 				};
 			});
-			clues.between.push([clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight]);		};
+			clues.between.push([clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight]);
+			puzzle.row[clueRow.left].column[clueColumn.left].solvable.bool = true;
+			puzzle.row[clueRow.center].column[clueColumn.center].solvable.bool = true;
+			puzzle.row[clueRow.right].column[clueColumn.right].solvable.bool = true;
+		};
 	}
 	else {
 		console.log("Maximum number of between clues.");
