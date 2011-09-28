@@ -91,6 +91,9 @@ function generateBetweenClue(unsolvableTile) {
 			puzzle.row[clueRow.left].column[clueColumn.left].solvable.bool = true;
 			puzzle.row[clueRow.center].column[clueColumn.center].solvable.bool = true;
 			puzzle.row[clueRow.right].column[clueColumn.right].solvable.bool = true;
+			puzzle.row[clueRow.left].column[clueColumn.left].referencedBy.push([clueRow.center, clueColumn.center], [clueRow.right, clueColumn.right]);
+			puzzle.row[clueRow.center].column[clueColumn.center].referencedBy.push([clueRow.left, clueColumn.left], [clueRow.right, clueColumn.right]);
+			puzzle.row[clueRow.right].column[clueColumn.right].referencedBy.push([clueRow.left, clueColumn.left], [clueRow.center, clueColumn.center]);
 		};
 	}
 	else {

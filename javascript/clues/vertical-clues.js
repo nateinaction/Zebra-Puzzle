@@ -65,6 +65,8 @@ function generateVerticalClue(unsolvableTile) {
 			clues.vertical.push([clueRow.top, clueTop, clueRow.bottom, clueBottom]);
 			puzzle.row[clueRow.top].column[unsolvableTile.column].solvable.bool = true;
 			puzzle.row[clueRow.bottom].column[unsolvableTile.column].solvable.bool = true;
+			puzzle.row[clueRow.top].column[unsolvableTile.column].referencedBy.push([clueRow.bottom, unsolvableTile.column]);
+			puzzle.row[clueRow.bottom].column[unsolvableTile.column].referencedBy.push([clueRow.top, unsolvableTile.column]);
 		};
 	}
 	else {

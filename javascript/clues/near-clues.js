@@ -71,6 +71,8 @@ function generateNearClue(unsolvableTile) {
 			clues.near.push([clueRow.left, clueLeft, clueRow.right, clueRight]);
 			puzzle.row[clueRow.left].column[clueColumn.left].solvable.bool = true;
 			puzzle.row[clueRow.right].column[clueColumn.right].solvable.bool = true;
+			puzzle.row[clueRow.left].column[clueColumn.left].referencedBy.push([clueRow.right, clueColumn.right]);
+			puzzle.row[clueRow.right].column[clueColumn.right].referencedBy.push([clueRow.left, clueColumn.left]);
 		};
 	}
 	else {

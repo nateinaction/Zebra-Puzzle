@@ -1,9 +1,15 @@
-function userInput(rowNumber, columnNumber, tileNumber) {
+function userInput(rowNumber, columnNumber, tileNumber, scoreThis) {
+	if (typeof scoreThis == 'undefined' ) scoreThis = true;
 	if (puzzle.row[rowNumber].column[columnNumber].solved.bool == false) { // if the tile has not been solved
 		if (puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].answer.bool == true) { // and the answer is correct
 			console.log("correct");
 			$("#" + rowNumber + columnNumber + tileNumber).removeClass("possible").removeClass("impossible").addClass("correct"); // mark the answer as correct
-			$("#score").html(score += 5); // add to the score
+			if (scoreThis == false) {
+				// do nothing
+			}
+			else {
+				$("#score").html(score += 5); // add to the score
+			};
 			puzzle.row[rowNumber].column[columnNumber].solved.string = 'solved'; // and mark the block as solvable in the array
 			puzzle.row[rowNumber].column[columnNumber].solved.bool = true;
 			for (var clean = 1; clean <= 6; clean++) { // then check all columns in the row
@@ -38,7 +44,12 @@ function userInput(rowNumber, columnNumber, tileNumber) {
 			$("#" + rowNumber + columnNumber + tileNumber).removeClass("possible").addClass("incorrect"); // mark the guess as incorrect
 			puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].possible.string = 'impossible';
 			puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].possible.bool = false;
-			$("#score").html(score -= 1); // remove from the score
+			if (scoreThis == false) {
+				// do nothing
+			}
+			else {
+				$("#score").html(score -= 1); // remove from the score
+			};
 			/* if there is only one guess left in the column, mark it as correct */
 			var guessAutoCorrect = new Array();
 			for (var guessCount = 1; guessCount <= 6; guessCount++) { // check all guesses in a column

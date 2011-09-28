@@ -13,7 +13,6 @@
 				<script src="./javascript/clues/vertical-clues.js"></script>
 				<script src="./javascript/clues/near-clues.js"></script>
 				<script src="./javascript/clues/between-clues.js"></script>
-				<!-- <script src="./javascript/solvable-check.js"></script> -->
 	</head>
 	<body>
 	<script language="JavaScript">
@@ -25,7 +24,7 @@
 					width : 6, // the width of the puzzle
 					row : Array(), // generate an array of rows
 					solvable : false, // set the puzzle as not solvable
-					solved : Array() // generate an array filled with all puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solved.bool
+					giveaway : 3
 				},
 				clues = {
 					between : Array(),
@@ -84,8 +83,8 @@
 							bool : false // set the boolean value of an unsolved column as false
 						},
 						answer : randomAnswer, // placeholder for the column answer
-						tile : Array() // then generate an array of tiles
-//						clued : { bool : false }
+						tile : Array(), // then generate an array of tiles
+						referencedBy : Array()
 					};
 					answers.row[rowNumber].column[columnNumber] = {
 						above : Array(), // generate an array of columns
@@ -93,9 +92,6 @@
 						right : Array(),
 						left : Array()
 					};
-					// puzzle.row[rowNumber].answer[columnNumber] = puzzle.row[rowNumber].column[columnNumber].answer; // set all array elements in puzzle.answer to match puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solvable.bool
-					// puzzle.solvable[((rowNumber - 1) * puzzle.width) + columnNumber] = puzzle.row[rowNumber].column[columnNumber].solvable.bool; // set all array elements in puzzle.solvable to match puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solvable.bool 
-					puzzle.solved[((rowNumber - 1) * puzzle.width) + columnNumber] = puzzle.row[rowNumber].column[columnNumber].solved.bool; // set all array elements in puzzle.solved to match puzzle.row[1 -> puzzle.height].columns[1 -> puzzle.height].solved.bool
 					document.write('<div class="column">');
 					document.write('<div class="padding">');
 					for (var tileNumber = 1; tileNumber <= puzzle.width; tileNumber++) { // for all tiles
