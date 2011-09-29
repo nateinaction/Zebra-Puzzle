@@ -24,7 +24,7 @@
 					width : 6, // the width of the puzzle
 					row : Array(), // generate an array of rows
 					solvable : false, // set the puzzle as not solvable
-					giveaway : 3
+					giveaway : 0
 				},
 				clues = {
 					between : Array(),
@@ -84,7 +84,8 @@
 						},
 						answer : randomAnswer, // placeholder for the column answer
 						tile : Array(), // then generate an array of tiles
-						referencedBy : Array()
+						referencedBy : Array(),
+						referenced : false
 					};
 					answers.row[rowNumber].column[columnNumber] = {
 						above : Array(), // generate an array of columns

@@ -58,24 +58,27 @@ function generateNearClue(unsolvableTile) {
 		};
 	
 		if (repeat == false) {
-			clueNumber++;
-			$(".horizontalClueArea").append('<div class="horizontalClue clue' + clueNumber + '"><div style="background-image:url(' + resources + 'row' + clueRow.left + '/' + clueLeft + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'clues/near.gif);" class="tile"></div><div style="background-image:url(' + resources + 'row' + clueRow.right + '/' + clueRight + '.jpg);" class="tile"></div></div>');
-			$(".clue" + clueNumber).rightClick( function(e) {
-				if (this.hasClass("flagged") == true) {
-					$(this).removeClass("flagged");
-				}
-				else if (this.hasClass("flagged") == false) {
-					$(this).addClass("flagged");
-				};
-			});
-			clues.near.push([clueRow.left, clueLeft, clueRow.right, clueRight]);
-			puzzle.row[clueRow.left].column[clueColumn.left].solvable.bool = true;
-			puzzle.row[clueRow.right].column[clueColumn.right].solvable.bool = true;
-			puzzle.row[clueRow.left].column[clueColumn.left].referencedBy.push([clueRow.right, clueColumn.right]);
-			puzzle.row[clueRow.right].column[clueColumn.right].referencedBy.push([clueRow.left, clueColumn.left]);
+			return {type : 'near', tile : [[clueRow.left, clueColumn.left], [clueRow.right, clueColumn.right]]};
 		};
 	}
 	else {
 		console.log("Maximum number of near clues.");
 	};
+};
+
+function displayNearClue(leftTile, rightTile) {
+	var leftRow = leftTile[0], rightRow = rightTile[0], leftColumn = leftTile[1], rightColumn = rightTile[1];
+	clueNumber++;
+	clues.near.push([leftRow, tileAnswer(leftTile), rightRow, tileAnswer(rightTile)]);
+	puzzle.row[leftRow].column[leftColumn].referenced = true;
+	puzzle.row[rightRow].column[rightColumn].referenced = true;
+	$(".horizontalClueArea").append('<div class="horizontalClue clue' + clueNumber + '"><div style="background-image:url(' + resources + 'row' + leftRow + '/' + tileAnswer(leftTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'clues/near.gif);" class="tile"></div><div style="background-image:url(' + resources + 'row' + rightRow + '/' + tileAnswer(rightTile) + '.jpg);" class="tile"></div></div>');
+	$(".clue" + clueNumber).rightClick( function(e) {
+		if (this.hasClass("flagged") == true) {
+			$(this).removeClass("flagged");
+		}
+		else if (this.hasClass("flagged") == false) {
+			$(this).addClass("flagged");
+		};
+	});
 };

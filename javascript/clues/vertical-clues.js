@@ -52,24 +52,27 @@ function generateVerticalClue(unsolvableTile) {
 		};
 	
 		if (repeat == false) {
-			clueNumber++;
-			$(".verticalClueArea").append('<div class="verticalClue clue' + clueNumber + '"><div style="background-image:url(' + resources + 'row' + clueRow.top + '/' + clueTop + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'row' + clueRow.bottom + '/' + clueBottom + '.jpg);" class="tile"></div></div>');
-			$(".clue" + clueNumber).rightClick( function(e) {
-				if (this.hasClass("flagged") == true) {
-					$(this).removeClass("flagged");
-				}
-				else if (this.hasClass("flagged") == false) {
-					$(this).addClass("flagged");
-				};
-			});
-			clues.vertical.push([clueRow.top, clueTop, clueRow.bottom, clueBottom]);
-			puzzle.row[clueRow.top].column[unsolvableTile.column].solvable.bool = true;
-			puzzle.row[clueRow.bottom].column[unsolvableTile.column].solvable.bool = true;
-			puzzle.row[clueRow.top].column[unsolvableTile.column].referencedBy.push([clueRow.bottom, unsolvableTile.column]);
-			puzzle.row[clueRow.bottom].column[unsolvableTile.column].referencedBy.push([clueRow.top, unsolvableTile.column]);
+			return {type : 'vertical', tile : [[clueRow.top, unsolvableTile.column], [clueRow.bottom, unsolvableTile.column]]};
 		};
 	}
 	else {
 		console.log("Maximum number of vertical clues.");
 	};      
+};
+
+function displayVerticalClue(topTile, bottomTile) {
+	var topRow = topTile[0], bottomRow = bottomTile[0], topColumn = topTile[1], bottomColumn = bottomTile[1];
+	clueNumber++;
+	clues.vertical.push([topRow, tileAnswer(topTile), bottomRow, tileAnswer(bottomTile)]);
+	puzzle.row[topRow].column[topColumn].referenced = true;
+	puzzle.row[bottomRow].column[bottomColumn].referenced = true;
+	$(".verticalClueArea").append('<div class="verticalClue clue' + clueNumber + '"><div style="background-image:url(' + resources + 'row' + topRow + '/' + tileAnswer(topTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'row' + bottomRow + '/' + tileAnswer(bottomTile) + '.jpg);" class="tile"></div></div>');
+	$(".clue" + clueNumber).rightClick( function(e) {
+		if (this.hasClass("flagged") == true) {
+			$(this).removeClass("flagged");
+		}
+		else if (this.hasClass("flagged") == false) {
+			$(this).addClass("flagged");
+		};
+	});
 };
