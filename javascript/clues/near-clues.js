@@ -1,5 +1,5 @@
 function generateNearClue(unsolvableTile) {
-	if (clues.near.length < clues.nearMax) { // this is the maximum number of near clues possible.
+	if (puzzle.clues.near.length < puzzle.clues.nearMax()) { // this is the maximum number of near clues possible.
 		var clueRow = Object(),
 				clueColumn = Object(),
 				unsolvableTile = {
@@ -51,8 +51,8 @@ function generateNearClue(unsolvableTile) {
 			
 		// check for repeating near clues
 		var tempArray = JSON.stringify([clueRow.left, clueLeft, clueRow.right, clueRight]), tempArrayInverse = JSON.stringify([clueRow.right, clueRight, clueRow.left, clueLeft]), repeat = false;
-		for (var x = 0, max = clues.near.length; x < max; x++) {
-			if (tempArray == JSON.stringify(clues.near[x]) || tempArrayInverse == JSON.stringify(clues.near[x])){
+		for (var x = 0, max = puzzle.clues.near.length; x < max; x++) {
+			if (tempArray == JSON.stringify(puzzle.clues.near[x]) || tempArrayInverse == JSON.stringify(puzzle.clues.near[x])){
 				repeat = true;
 			};
 		};
@@ -68,12 +68,12 @@ function generateNearClue(unsolvableTile) {
 
 function displayNearClue(leftTile, rightTile) {
 	var leftRow = leftTile[0], rightRow = rightTile[0], leftColumn = leftTile[1], rightColumn = rightTile[1];
-	clueNumber++;
-	clues.near.push([leftRow, tileAnswer(leftTile), rightRow, tileAnswer(rightTile)]);
+	puzzle.clues.count++;
+	puzzle.clues.near.push([leftRow, tileAnswer(leftTile), rightRow, tileAnswer(rightTile)]);
 	puzzle.row[leftRow].column[leftColumn].referenced = true;
 	puzzle.row[rightRow].column[rightColumn].referenced = true;
-	$(".horizontalClueArea").append('<div class="horizontalClue clue' + clueNumber + '"><div style="background-image:url(' + resources + 'row' + leftRow + '/' + tileAnswer(leftTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'clues/near.gif);" class="tile"></div><div style="background-image:url(' + resources + 'row' + rightRow + '/' + tileAnswer(rightTile) + '.jpg);" class="tile"></div></div>');
-	$(".clue" + clueNumber).rightClick( function(e) {
+	$(".horizontalClueArea").append('<div class="horizontalClue clue' + puzzle.clues.count + '"><div style="background-image:url(' + resources + 'row' + leftRow + '/' + tileAnswer(leftTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'clues/near.gif);" class="tile"></div><div style="background-image:url(' + resources + 'row' + rightRow + '/' + tileAnswer(rightTile) + '.jpg);" class="tile"></div></div>');
+	$(".clue" + puzzle.clues.count).rightClick( function(e) {
 		if (this.hasClass("flagged") == true) {
 			$(this).removeClass("flagged");
 		}

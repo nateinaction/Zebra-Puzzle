@@ -1,5 +1,5 @@
 function generateVerticalClue(unsolvableTile) {
-	if (clues.vertical.length < clues.verticalMax) { // this is the maximum number of vertical clues possible.
+	if (puzzle.clues.vertical.length < puzzle.clues.verticalMax()) { // this is the maximum number of vertical clues possible.
 		var clueRow = Object(),
 				unsolvableTile = {
 					row : unsolvableTile[0],
@@ -45,8 +45,8 @@ function generateVerticalClue(unsolvableTile) {
 
 		// check for repeating vertical clues
 		var tempArray = JSON.stringify([clueRow.top, clueTop, clueRow.bottom, clueBottom]), repeat = false;
-		for (var x = 0, max = clues.vertical.length; x < max; x++) {
-			if (tempArray == JSON.stringify(clues.vertical[x])){
+		for (var x = 0, max = puzzle.clues.vertical.length; x < max; x++) {
+			if (tempArray == JSON.stringify(puzzle.clues.vertical[x])){
 				repeat = true;
 			};
 		};
@@ -62,12 +62,12 @@ function generateVerticalClue(unsolvableTile) {
 
 function displayVerticalClue(topTile, bottomTile) {
 	var topRow = topTile[0], bottomRow = bottomTile[0], topColumn = topTile[1], bottomColumn = bottomTile[1];
-	clueNumber++;
-	clues.vertical.push([topRow, tileAnswer(topTile), bottomRow, tileAnswer(bottomTile)]);
+	puzzle.clues.count++;
+	puzzle.clues.vertical.push([topRow, tileAnswer(topTile), bottomRow, tileAnswer(bottomTile)]);
 	puzzle.row[topRow].column[topColumn].referenced = true;
 	puzzle.row[bottomRow].column[bottomColumn].referenced = true;
-	$(".verticalClueArea").append('<div class="verticalClue clue' + clueNumber + '"><div style="background-image:url(' + resources + 'row' + topRow + '/' + tileAnswer(topTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'row' + bottomRow + '/' + tileAnswer(bottomTile) + '.jpg);" class="tile"></div></div>');
-	$(".clue" + clueNumber).rightClick( function(e) {
+	$(".verticalClueArea").append('<div class="verticalClue clue' + puzzle.clues.count + '"><div style="background-image:url(' + resources + 'row' + topRow + '/' + tileAnswer(topTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'row' + bottomRow + '/' + tileAnswer(bottomTile) + '.jpg);" class="tile"></div></div>');
+	$(".clue" + puzzle.clues.count).rightClick( function(e) {
 		if (this.hasClass("flagged") == true) {
 			$(this).removeClass("flagged");
 		}

@@ -1,5 +1,5 @@
 function generateBetweenClue(tile) {
-	if (clues.between.length < clues.betweenMax) { // this is the maximum number of between clues possible.
+	if (puzzle.clues.between.length < puzzle.clues.betweenMax()) { // this is the maximum number of between clues possible.
 		var clueRow = Object(),
 				clueColumn = Object(),
 				tile = {
@@ -70,8 +70,8 @@ function generateBetweenClue(tile) {
 			
 		// check for repeating between clues
 		var tempArray = JSON.stringify([clueRow.left, clueLeft, clueRow.center, clueCenter, clueRow.right, clueRight]), tempArrayInverse = JSON.stringify([clueRow.right, clueRight, clueRow.center, clueCenter, clueRow.left, clueLeft]), repeat = false; // this is the maximum number of between clues possible without repeating.
-		for (var x = 0, max = clues.between.length; x < max; x++) {
-			if (tempArray == JSON.stringify(clues.between[x]) || tempArrayInverse == JSON.stringify(clues.between[x])){
+		for (var x = 0, max = puzzle.clues.between.length; x < max; x++) {
+			if (tempArray == JSON.stringify(puzzle.clues.between[x]) || tempArrayInverse == JSON.stringify(puzzle.clues.between[x])){
 				repeat = true;
 			};
 		};
@@ -87,13 +87,13 @@ function generateBetweenClue(tile) {
 
 function displayBetweenClue(leftTile, centerTile, rightTile) {
 	var leftRow = leftTile[0], centerRow = centerTile[0], rightRow = rightTile[0], leftColumn = leftTile[1], centerColumn = centerTile[1], rightColumn = rightTile[1];
-	clueNumber++;
-	clues.between.push([leftRow, tileAnswer(leftTile), centerRow, tileAnswer(centerTile), rightRow, tileAnswer(rightTile)]);
+	puzzle.clues.count++;
+	puzzle.clues.between.push([leftRow, tileAnswer(leftTile), centerRow, tileAnswer(centerTile), rightRow, tileAnswer(rightTile)]);
 	puzzle.row[leftRow].column[leftColumn].referenced = true;
 	puzzle.row[centerRow].column[centerColumn].referenced = true;
 	puzzle.row[rightRow].column[rightColumn].referenced = true;
-	$(".horizontalClueArea").append('<div class="horizontalClue clue' + clueNumber + '"><div class="betweenClue" style="background-image:url(' + resources + 'clues/between.gif);"></div><div style="background-image:url(' + resources + 'row' + leftRow + '/' + tileAnswer(leftTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'row' + centerRow + '/' + tileAnswer(centerTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'row' + rightRow + '/' + tileAnswer(rightTile) + '.jpg);" class="tile"></div></div>');
-	$(".clue" + clueNumber).rightClick( function(e) {
+	$(".horizontalClueArea").append('<div class="horizontalClue clue' + puzzle.clues.count + '"><div class="betweenClue" style="background-image:url(' + resources + 'clues/between.gif);"></div><div style="background-image:url(' + resources + 'row' + leftRow + '/' + tileAnswer(leftTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'row' + centerRow + '/' + tileAnswer(centerTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'row' + rightRow + '/' + tileAnswer(rightTile) + '.jpg);" class="tile"></div></div>');
+	$(".clue" + puzzle.clues.count).rightClick( function(e) {
 		if (this.hasClass("flagged") == true) {
 			$(this).removeClass("flagged");
 		}
