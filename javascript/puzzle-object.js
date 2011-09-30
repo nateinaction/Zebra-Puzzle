@@ -84,15 +84,9 @@ function newPuzzle() {
 							return "unflagged";
 						};
 					};
-					function flagChange(rowNumber, columnNumber, tileNumber) {
-						puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].flag.bool = true;
-						console.log(puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].flag.bool);
-					};
 					document.write('<div id="' + rowNumber + columnNumber + tileNumber + '" style="background-image:url(' + resources + 'row' + rowNumber + '/' + tileNumber + '.jpg);" class="' + flagStatus() + '"></div>');
 					$("#" + rowNumber + columnNumber + tileNumber).click(function(rowNumber, columnNumber, tileNumber) {
-						console.log(rowNumber);
 						return function() {
-							console.log("test");
 							userInput(rowNumber, columnNumber, tileNumber);
 						};
 					}(rowNumber, columnNumber, tileNumber));

@@ -1,5 +1,4 @@
 function userInput(rowNumber, columnNumber, tileNumber, scoreThis) {
-	console.log('test');
 	if (scoreThis == undefined) scoreThis = true;
 	if (puzzle.row[rowNumber].column[columnNumber].solved.bool == false) { // if the tile has not been solved
 		if (puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].answer.bool == true) { // and the answer is correct
