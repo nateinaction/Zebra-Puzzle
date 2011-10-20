@@ -28,7 +28,6 @@ VERSION HISTORY:
 * 0.05: The puzzle object now holds clues and preferences. The function that generates the puzzle object has been entirely separated from the function that renders the puzzle from the object. This will allow me to store a users game state in a database, retrieve it and render it without issue.
 * 0.04: Clues are generated until the puzzle is solvable.
 * 0.03:	The puzzle object architecture was engineered.
-* 0.02:	Clues are no longer allowed to repeat, clues now fail with console message when maximum number of possible clues is reached. The puzzle
-				only generates if a minimum puzzle size of 3x4 is reached.
+* 0.02:	Clues are no longer allowed to repeat, clues now fail with console message when maximum number of possible clues is reached. The puzzle only generates if a minimum puzzle size of 3x4 is reached.
 * 0.01:	Rewrote code in accordance with project appendix, clues can now be flagged.
 * 0.00:	Fixed some spacing issues and testing git push.
