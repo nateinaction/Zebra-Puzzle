@@ -9,16 +9,16 @@ function generateVerticalClue(unsolvableTile) {
 		// randomly select row for unknown tile
 		if (unsolvableTile.row == 1) {
 			clueRow.top = unsolvableTile.row;
-			clueRow.bottom = Math.floor(Math.random() * puzzle.height) + 1;
+			clueRow.bottom = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 			while (clueRow.top >= clueRow.bottom) {
-				clueRow.bottom = Math.floor(Math.random() * puzzle.height) + 1;
+				clueRow.bottom = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 			};
 		}
-		else if (unsolvableTile.row == puzzle.height) {
-			clueRow.top = Math.floor(Math.random() * puzzle.height) + 1;
+		else if (unsolvableTile.row == puzzle.prefered.height) {
+			clueRow.top = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 			clueRow.bottom = unsolvableTile.row;
 			while (clueRow.top >= clueRow.bottom) {
-				clueRow.top = Math.floor(Math.random() * puzzle.height) + 1;
+				clueRow.top = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 			};
 		}
 		else {
@@ -26,16 +26,16 @@ function generateVerticalClue(unsolvableTile) {
 			
 			if (randomWing == 0) {
 				clueRow.top = unsolvableTile.row;
-				clueRow.bottom = Math.floor(Math.random() * puzzle.height) + 1;
+				clueRow.bottom = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 				while (clueRow.top >= clueRow.bottom) {
-					clueRow.bottom = Math.floor(Math.random() * puzzle.height) + 1;
+					clueRow.bottom = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 				};
 			}
 			else {
-				clueRow.top = Math.floor(Math.random() * puzzle.height) + 1;
+				clueRow.top = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 				clueRow.bottom = unsolvableTile.row;
 				while (clueRow.top >= clueRow.bottom) {
-					clueRow.top = Math.floor(Math.random() * puzzle.height) + 1;
+					clueRow.top = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 				};
 			};
 		};
@@ -60,12 +60,16 @@ function generateVerticalClue(unsolvableTile) {
 	};      
 };
 
+function referenceVerticalClue(topTile, bottomTile) {
+	var topRow = topTile[0], bottomRow = bottomTile[0], topColumn = topTile[1], bottomColumn = bottomTile[1];
+	puzzle.row[topRow].column[topColumn].referenced = true;
+	puzzle.row[bottomRow].column[bottomColumn].referenced = true;
+};
+
 function displayVerticalClue(topTile, bottomTile) {
 	var topRow = topTile[0], bottomRow = bottomTile[0], topColumn = topTile[1], bottomColumn = bottomTile[1];
 	puzzle.clues.count++;
 	puzzle.clues.vertical.push([topRow, tileAnswer(topTile), bottomRow, tileAnswer(bottomTile)]);
-	puzzle.row[topRow].column[topColumn].referenced = true;
-	puzzle.row[bottomRow].column[bottomColumn].referenced = true;
 	$(".verticalClueArea").append('<div class="verticalClue clue' + puzzle.clues.count + '"><div style="background-image:url(' + resources + 'row' + topRow + '/' + tileAnswer(topTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'row' + bottomRow + '/' + tileAnswer(bottomTile) + '.jpg);" class="tile"></div></div>');
 	$(".clue" + puzzle.clues.count).rightClick( function(e) {
 		if (this.hasClass("flagged") == true) {

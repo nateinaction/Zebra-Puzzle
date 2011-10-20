@@ -109,3 +109,27 @@
 		text-align: justify;
     float:left;
 }
+
+.notification {
+	z-index: 2;
+	position: absolute;
+	width: 600px;
+  height: 300px;
+	background: #FFF;
+	display: none;
+}
+
+.button {
+	width: 60px;
+  height: 30px;
+	background: #ABC;
+	z-index: 2;
+}
+
+#visible {
+	visibility: visible;
+}
+
+#hidden {
+	visibility: hidden;
+}
