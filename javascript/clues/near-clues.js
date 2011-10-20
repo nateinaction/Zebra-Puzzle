@@ -10,26 +10,26 @@ function generateNearClue(unsolvableTile) {
 		if (unsolvableTile.column == 1) {
 			clueRow.left = unsolvableTile.row;
 			clueColumn.left = unsolvableTile.column;
-			clueRow.right = Math.floor(Math.random() * puzzle.height) + 1;
+			clueRow.right = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 			clueColumn.right = clueColumn.left + 1;
 		}
-		else if (unsolvableTile.column == puzzle.width) {
+		else if (unsolvableTile.column == puzzle.prefered.width) {
 			clueRow.right = unsolvableTile.row;
 			clueColumn.right = unsolvableTile.column;
-			clueRow.left = Math.floor(Math.random() * puzzle.height) + 1;
+			clueRow.left = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 			clueColumn.left = clueColumn.right - 1;
 		}
 		else {
 			if (Math.round(Math.random()) == 1) {
 				clueRow.left = unsolvableTile.row;
 				clueColumn.left = unsolvableTile.column;
-				clueRow.right = Math.floor(Math.random() * puzzle.height) + 1;
+				clueRow.right = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 				clueColumn.right = clueColumn.left + 1;
 			}
 			else {
 				clueRow.right = unsolvableTile.row;
 				clueColumn.right = unsolvableTile.column;
-				clueRow.left = Math.floor(Math.random() * puzzle.height) + 1;
+				clueRow.left = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 				clueColumn.left = clueColumn.right - 1;
 			};
 		}
@@ -66,12 +66,16 @@ function generateNearClue(unsolvableTile) {
 	};
 };
 
+function referenceNearClue(leftTile, rightTile) {
+	var leftRow = leftTile[0], rightRow = rightTile[0], leftColumn = leftTile[1], rightColumn = rightTile[1];
+	puzzle.row[leftRow].column[leftColumn].referenced = true;
+	puzzle.row[rightRow].column[rightColumn].referenced = true;
+};
+
 function displayNearClue(leftTile, rightTile) {
 	var leftRow = leftTile[0], rightRow = rightTile[0], leftColumn = leftTile[1], rightColumn = rightTile[1];
 	puzzle.clues.count++;
 	puzzle.clues.near.push([leftRow, tileAnswer(leftTile), rightRow, tileAnswer(rightTile)]);
-	puzzle.row[leftRow].column[leftColumn].referenced = true;
-	puzzle.row[rightRow].column[rightColumn].referenced = true;
 	$(".horizontalClueArea").append('<div class="horizontalClue clue' + puzzle.clues.count + '"><div style="background-image:url(' + resources + 'row' + leftRow + '/' + tileAnswer(leftTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'clues/near.gif);" class="tile"></div><div style="background-image:url(' + resources + 'row' + rightRow + '/' + tileAnswer(rightTile) + '.jpg);" class="tile"></div></div>');
 	$(".clue" + puzzle.clues.count).rightClick( function(e) {
 		if (this.hasClass("flagged") == true) {

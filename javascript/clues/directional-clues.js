@@ -8,15 +8,15 @@ function generateDirectionalClue(unsolvableTile) {
 				};
 						
 		// extract random unsolvable tile and use it as either the left or right clue
-		if (unsolvableTile.column == puzzle.width) {
+		if (unsolvableTile.column == puzzle.prefered.width) {
 			clueRow.right = unsolvableTile.row;
 			clueColumn.right = unsolvableTile.column;
 			
 			// randomly select left row and column
-			clueRow.left = Math.floor(Math.random() * puzzle.height) + 1;
-			clueColumn.left = Math.floor(Math.random() * puzzle.width) + 1;
+			clueRow.left = Math.floor(Math.random() * puzzle.prefered.height) + 1;
+			clueColumn.left = Math.floor(Math.random() * puzzle.prefered.width) + 1;
 			while (clueColumn.right <= clueColumn.left) {
-				clueColumn.left = Math.floor(Math.random() * puzzle.width) + 1;
+				clueColumn.left = Math.floor(Math.random() * puzzle.prefered.width) + 1;
 			};
 		}
 		else if (unsolvableTile.column == 1) {
@@ -24,10 +24,10 @@ function generateDirectionalClue(unsolvableTile) {
 			clueColumn.left = unsolvableTile.column;
 			
 			// randomly select right row and column
-			clueRow.right = Math.floor(Math.random() * puzzle.height) + 1;
-			clueColumn.right = Math.floor(Math.random() * puzzle.width) + 1;
+			clueRow.right = Math.floor(Math.random() * puzzle.prefered.height) + 1;
+			clueColumn.right = Math.floor(Math.random() * puzzle.prefered.width) + 1;
 			while (clueColumn.left >= clueColumn.right) {
-				clueColumn.right = Math.floor(Math.random() * puzzle.width) + 1;
+				clueColumn.right = Math.floor(Math.random() * puzzle.prefered.width) + 1;
 			};
 		}
 		else {
@@ -38,10 +38,10 @@ function generateDirectionalClue(unsolvableTile) {
 				clueColumn.right = unsolvableTile.column;
 
 				// randomly select left row and column
-				clueRow.left = Math.floor(Math.random() * puzzle.height) + 1;
-				clueColumn.left = Math.floor(Math.random() * puzzle.width) + 1;
+				clueRow.left = Math.floor(Math.random() * puzzle.prefered.height) + 1;
+				clueColumn.left = Math.floor(Math.random() * puzzle.prefered.width) + 1;
 				while (clueColumn.right <= clueColumn.left) {
-					clueColumn.left = Math.floor(Math.random() * puzzle.width) + 1;
+					clueColumn.left = Math.floor(Math.random() * puzzle.prefered.width) + 1;
 				};
 			}
 			else {
@@ -49,10 +49,10 @@ function generateDirectionalClue(unsolvableTile) {
 				clueColumn.left = unsolvableTile.column;
 
 				// randomly select right row and column
-				clueRow.right = Math.floor(Math.random() * puzzle.height) + 1;
-				clueColumn.right = Math.floor(Math.random() * puzzle.width) + 1;
+				clueRow.right = Math.floor(Math.random() * puzzle.prefered.height) + 1;
+				clueColumn.right = Math.floor(Math.random() * puzzle.prefered.width) + 1;
 				while (clueColumn.left >= clueColumn.right) {
-					clueColumn.right = Math.floor(Math.random() * puzzle.width) + 1;
+					clueColumn.right = Math.floor(Math.random() * puzzle.prefered.width) + 1;
 				};
 			};
 		};
@@ -77,12 +77,16 @@ function generateDirectionalClue(unsolvableTile) {
 	};
 };
 
+function referenceDirectionalClue(leftTile, rightTile) {
+	var leftRow = leftTile[0], rightRow = rightTile[0], leftColumn = leftTile[1], rightColumn = rightTile[1];
+	puzzle.row[leftRow].column[leftColumn].referenced = true;
+	puzzle.row[rightRow].column[rightColumn].referenced = true;
+}
+
 function displayDirectionalClue(leftTile, rightTile) {
 	var leftRow = leftTile[0], rightRow = rightTile[0], leftColumn = leftTile[1], rightColumn = rightTile[1];
 	puzzle.clues.count++;
 	puzzle.clues.directional.push([leftRow, tileAnswer(leftTile), rightRow, tileAnswer(rightTile)]);
-	puzzle.row[leftRow].column[leftColumn].referenced = true;
-	puzzle.row[rightRow].column[rightColumn].referenced = true;
 	$(".horizontalClueArea").append('<div class="horizontalClue clue' + puzzle.clues.count + '"><div style="background-image:url(' + resources + 'row' + leftRow + '/' + tileAnswer(leftTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'clues/direction.gif);" class="tile"></div><div style="background-image:url(' + resources + 'row' + rightRow + '/' + tileAnswer(rightTile) + '.jpg);" class="tile"></div></div>');
 	$(".clue" + puzzle.clues.count).rightClick( function(e) {
 		if (this.hasClass("flagged") == true) {

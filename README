@@ -1,7 +1,7 @@
 @author Nate Gay @thenatedanger
 @copyright 2011 Nate Gay
 @licence GPLv3 <http://www.gnu.org/licenses/gpl.html>
-@version 0.04
+@version 0.05
 
 ABOUT:
 The Zebra puzzle, also known as Einstein's Puzzle or Einstein's Riddle, is a game for which is solved through the application of deductive reasoning and cognitive mapping.
@@ -13,6 +13,8 @@ PROJECT DIRECTION:
 * HIGH: Allow players to save and resume their games.
 * HIGH: Visually indicate to the player whether they've selected a correct or incorrect answer.
 * HIGH: Congratulate a player who has successfully completed a puzzle with some fuzzy warm feelings and a summary of their score.
+* MEDIUM: Implement a simple user authentication system with facebook integration.
+* MEDIUM: Communicate with a database server to store and retrieve a users game states.
 * MEDIUM: Track scores; preferably through a social network tie-in like facebook or google plus.
 * MEDIUM: Introduce social aspects to the game i.e. achievements, multiplayer, cooperative, etc.
 * MEDIUM: Continue separation of scope and reusable code.
@@ -23,6 +25,7 @@ PROJECT DIRECTION:
 * ONGOING: Write out clear instructions for how to play.
 
 VERSION HISTORY:
+* 0.05: The puzzle object now holds clues and preferences. The function that generates the puzzle object has been entirely separated from the function that renders the puzzle from the object. This will allow me to store a users game state in a database, retrieve it and render it without issue.
 * 0.04: Clues are generated until the puzzle is solvable.
 * 0.03:	The puzzle object architecture was engineered.
 * 0.02:	Clues are no longer allowed to repeat, clues now fail with console message when maximum number of possible clues is reached. The puzzle

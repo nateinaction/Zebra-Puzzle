@@ -7,11 +7,11 @@ function generateBetweenClue(tile) {
 					column : tile[1]
 				};
 		
-		if (Math.round(Math.random()) == 1 && tile.column != 1 && tile.column != puzzle.width) {
-			clueRow.left = Math.floor(Math.random() * puzzle.height) + 1;
+		if (Math.round(Math.random()) == 1 && tile.column != 1 && tile.column != puzzle.prefered.width) {
+			clueRow.left = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 			clueRow.center = tile.row;
 			clueColumn.center = tile.column;
-			clueRow.right = Math.floor(Math.random() * puzzle.height) + 1;
+			clueRow.right = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 			// select columns
 			clueColumn.left = clueColumn.center - 1;
 			clueColumn.right = clueColumn.center + 1;
@@ -20,11 +20,11 @@ function generateBetweenClue(tile) {
 			if (Math.round(Math.random()) == 1) {
 				clueRow.left = tile.row;
 				clueColumn.left = tile.column;
-				clueRow.center = Math.floor(Math.random() * puzzle.height) + 1;
-				clueRow.right = Math.floor(Math.random() * puzzle.height) + 1;
+				clueRow.center = Math.floor(Math.random() * puzzle.prefered.height) + 1;
+				clueRow.right = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 				
 				// select columns
-				if (clueColumn.left <= puzzle.width - 2) {
+				if (clueColumn.left <= puzzle.prefered.width - 2) {
 					clueColumn.center = clueColumn.left + 1;
 					clueColumn.right = clueColumn.left + 2;
 				}
@@ -34,8 +34,8 @@ function generateBetweenClue(tile) {
 				};
 			}
 			else{
-				clueRow.left = Math.floor(Math.random() * puzzle.height) + 1;
-				clueRow.center = Math.floor(Math.random() * puzzle.height) + 1;
+				clueRow.left = Math.floor(Math.random() * puzzle.prefered.height) + 1;
+				clueRow.center = Math.floor(Math.random() * puzzle.prefered.height) + 1;
 				clueRow.right = tile.row;
 				clueColumn.right = tile.column;
 				
@@ -85,13 +85,17 @@ function generateBetweenClue(tile) {
 	};
 };
 
+function referenceBetweenClue(leftTile, centerTile, rightTile) {
+	var leftRow = leftTile[0], centerRow = centerTile[0], rightRow = rightTile[0], leftColumn = leftTile[1], centerColumn = centerTile[1], rightColumn = rightTile[1];
+	puzzle.row[leftRow].column[leftColumn].referenced = true;
+	puzzle.row[centerRow].column[centerColumn].referenced = true;
+	puzzle.row[rightRow].column[rightColumn].referenced = true;
+}
+
 function displayBetweenClue(leftTile, centerTile, rightTile) {
 	var leftRow = leftTile[0], centerRow = centerTile[0], rightRow = rightTile[0], leftColumn = leftTile[1], centerColumn = centerTile[1], rightColumn = rightTile[1];
 	puzzle.clues.count++;
 	puzzle.clues.between.push([leftRow, tileAnswer(leftTile), centerRow, tileAnswer(centerTile), rightRow, tileAnswer(rightTile)]);
-	puzzle.row[leftRow].column[leftColumn].referenced = true;
-	puzzle.row[centerRow].column[centerColumn].referenced = true;
-	puzzle.row[rightRow].column[rightColumn].referenced = true;
 	$(".horizontalClueArea").append('<div class="horizontalClue clue' + puzzle.clues.count + '"><div class="betweenClue" style="background-image:url(' + resources + 'clues/between.gif);"></div><div style="background-image:url(' + resources + 'row' + leftRow + '/' + tileAnswer(leftTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'row' + centerRow + '/' + tileAnswer(centerTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'row' + rightRow + '/' + tileAnswer(rightTile) + '.jpg);" class="tile"></div></div>');
 	$(".clue" + puzzle.clues.count).rightClick( function(e) {
 		if (this.hasClass("flagged") == true) {
