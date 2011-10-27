@@ -1,0 +1,254 @@
+/* CSS for Zebra Puzzle rendered in a desktop environment */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: Georgia, serif;
+	background: #494949;
+}
+
+a	{
+	text-decoration: none;
+}
+
+div.wrap {
+	margin-left:auto;
+	margin-right:auto;
+	width: 800px;
+}
+
+div.nav {
+	height: 100%;
+	background: gray;
+	padding: 10px;
+}
+
+div.nav ul {
+	list-style: none;
+}
+
+div.nav ul li {
+	display: inline;
+	padding: 5px 5px;
+}
+
+div.nav a:link {
+	color: black;
+}
+
+div.nav a:visited {
+	color: black;
+}
+
+div.nav a:hover {
+	color: #aaaaaa;
+}
+
+div.puzzle {
+	background: #a56b3c;
+	padding: 10px 62.5px 10px 62.5px;
+}
+
+div.puzzle ul {
+	list-style: none;
+}
+
+div.puzzle ul li {
+	display: table-row;
+}
+
+div.clues {
+	background: white;
+}
+
+div.clues ol {
+	list-style-type: decimal;
+	display: table-row;
+}
+
+div.clues ol li {
+	margin: 20px 50px 20px 50px;
+}
+
+.translucent {
+	opacity:0.4;
+}
+
+.guess {
+	height: 30px;
+	width: 30px;
+}
+
+.incorrect {
+	visibility: hidden;
+}
+
+.row {
+	height: 110px;
+	display: table-row;
+}
+
+.tile {
+	height: 60px;
+	width: 90px;
+	border-radius: 5px;
+	background: white;
+	display: block;
+	float: left;
+	overflow: hidden;
+	margin: 5px;
+	padding: 20px 5px 20px 5px;
+}
+
+.food-row a {
+	background: url(../images/food-row/sprite.png) no-repeat;
+	display: block;
+	float:left;
+}
+
+.food-row a.apple {
+	background-position: 0px 0px;
+}
+
+.food-row a.orange {
+	background-position: -30px 0px;
+}
+
+.food-row a.watermelon {
+	background-position: -60px 0px;
+}
+
+.food-row a.strawberry {
+	background-position: -90px 0px;
+}
+
+.food-row a.eggplant {
+	background-position: -120px 0px;
+}
+
+.food-row a.tomato {
+	background-position: -150px 0px;
+}
+
+.animal-row a {
+	background: url(../images/animal-row/sprite.png) no-repeat;
+	display: block;
+	float:left;
+}
+
+.animal-row a.dog {
+	background-position: 0px 0px;
+}
+
+.animal-row a.cat {
+	background-position: -30px 0px;
+}
+
+.animal-row a.pig {
+	background-position: -60px 0px;
+}
+
+.animal-row a.frog {
+	background-position: -90px 0px;
+}
+
+.animal-row a.koala {
+	background-position: -120px 0px;
+}
+
+.animal-row a.bunny {
+	background-position: -150px 0px;
+}
+
+.heart-row a {
+	background: url(../images/heart-row/sprite.png) no-repeat;
+	display: block;
+	float:left;
+}
+
+.heart-row a.yellow-heart {
+	background-position: 0px 0px;
+}
+
+.heart-row a.blue-heart {
+	background-position: -30px 0px;
+}
+
+.heart-row a.purple-heart {
+	background-position: -60px 0px;
+}
+
+.heart-row a.pink-heart {
+	background-position: -90px 0px;
+}
+
+.heart-row a.green-heart {
+	background-position: -120px 0px;
+}
+
+.heart-row a.red-heart {
+	background-position: -150px 0px;
+}
+
+.sport-row a {
+	background: url(../images/sport-row/sprite.png) no-repeat;
+	display: block;
+	float:left;
+}
+
+.sport-row a.football {
+	background-position: 0px 0px;
+}
+
+.sport-row a.basketball {
+	background-position: -30px 0px;
+}
+
+.sport-row a.soccer-ball {
+	background-position: -60px 0px;
+}
+
+.sport-row a.baseball {
+	background-position: -90px 0px;
+}
+
+.sport-row a.tennis-ball {
+	background-position: -120px 0px;
+}
+
+.sport-row a.eight-ball {
+	background-position: -150px 0px;
+}
+
+.transport-row a {
+	background: url(../images/transport-row/sprite.png) no-repeat;
+	display: block;
+	float:left;
+}
+
+.transport-row a.rocketship {
+	background-position: 0px 0px;
+}
+
+.transport-row a.sailboat {
+	background-position: -30px 0px;
+}
+
+.transport-row a.bicycle {
+	background-position: -60px 0px;
+}
+
+.transport-row a.airplane {
+	background-position: -90px 0px;
+}
+
+.transport-row a.car {
+	background-position: -120px 0px;
+}
+
+.transport-row a.bus {
+	background-position: -150px 0px;
+}

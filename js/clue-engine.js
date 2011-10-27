@@ -7,8 +7,8 @@
 function generateClues() {
 	// count all unreferenced tiles
 	var unreferencedTiles = 0;
-	for (var rowNumber = 1; rowNumber <= puzzle.prefered.height; rowNumber++) {
-		for (var columnNumber = 1; columnNumber <= puzzle.prefered.width; columnNumber++) {
+	for (var rowNumber = 1; rowNumber <= puzzle.preferred.height; rowNumber++) {
+		for (var columnNumber = 1; columnNumber <= puzzle.preferred.width; columnNumber++) {
 			if (puzzle.row[rowNumber].column[columnNumber].referenced == false) {
 				unreferencedTiles++;
 			};
@@ -16,7 +16,7 @@ function generateClues() {
 	};
 	
 	if (unreferencedTiles > 0) {
-		if (unreferencedTiles == puzzle.prefered.width * puzzle.prefered.height) {
+		if (unreferencedTiles == puzzle.preferred.width * puzzle.preferred.height) {
 			// generate a random clue
 			puzzle.clues.array.push(randomClue(randomUnreferencedTile()));
 			referenceClue(randomClue(randomUnreferencedTile()));
@@ -24,7 +24,7 @@ function generateClues() {
 		else {
 			var cluePass = false;
 			// if the puzzle has 50% or more of it's tiles referenced then generate a random starting point from an unreferenced tile
-			if (unreferencedTiles <= (puzzle.prefered.width * puzzle.prefered.height) / 2) {
+			if (unreferencedTiles <= (puzzle.preferred.width * puzzle.preferred.height) / 2) {
 				// generate a clue until it includes at least one referenced tile
 				var clue;
 				while (cluePass == false) {
@@ -75,10 +75,10 @@ function generateClues() {
 		// and we give away answer(s)
 		// BUG: on rare occassions we give away 1 too many answers.
 		for (var x = 1; x <= puzzle.giveaway; x++) {
-			var giveaway = [Math.floor(Math.random() * puzzle.prefered.height) + 1, Math.floor(Math.random() * puzzle.prefered.width) + 1];
+			var giveaway = [Math.floor(Math.random() * puzzle.preferred.height) + 1, Math.floor(Math.random() * puzzle.preferred.width) + 1];
 			// prevent repeated giveaway answers
 			while (puzzle.row[giveaway[0]].column[giveaway[1]].solved.bool == true) {
-				giveaway = [Math.floor(Math.random() * puzzle.prefered.height) + 1, Math.floor(Math.random() * puzzle.prefered.width) + 1];
+				giveaway = [Math.floor(Math.random() * puzzle.preferred.height) + 1, Math.floor(Math.random() * puzzle.preferred.width) + 1];
 			};
 			userInput(giveaway[0], giveaway[1], puzzle.row[giveaway[0]].column[giveaway[1]].answer, false);
 		};
@@ -88,8 +88,8 @@ function generateClues() {
 // this function returns a non-restricted random referenced tile
 function randomReferencedTile() {
 	var referencedTiles = Array(), referencedTile = Array();
-	for (var rowNumber = 1; rowNumber <= puzzle.prefered.height; rowNumber++) {
-		for (var columnNumber = 1; columnNumber <= puzzle.prefered.width; columnNumber++) {
+	for (var rowNumber = 1; rowNumber <= puzzle.preferred.height; rowNumber++) {
+		for (var columnNumber = 1; columnNumber <= puzzle.preferred.width; columnNumber++) {
 			if (puzzle.row[rowNumber].column[columnNumber].referenced == true) {
 				referencedTiles.push([rowNumber, columnNumber]);
 			};
@@ -105,8 +105,8 @@ function randomReferencedTile() {
 // this function returns a non-restricted random unreferenced tile
 function randomUnreferencedTile() {
 	var unreferencedTiles = Array(), unreferencedTile = Array();
-	for (var rowNumber = 1; rowNumber <= puzzle.prefered.height; rowNumber++) {
-		for (var columnNumber = 1; columnNumber <= puzzle.prefered.width; columnNumber++) {
+	for (var rowNumber = 1; rowNumber <= puzzle.preferred.height; rowNumber++) {
+		for (var columnNumber = 1; columnNumber <= puzzle.preferred.width; columnNumber++) {
 			if (puzzle.row[rowNumber].column[columnNumber].referenced == false) {
 				unreferencedTiles.push([rowNumber, columnNumber]);
 			};
@@ -176,3 +176,7 @@ function displayClue(clue) {
 			break;	
 	};
 };
+
+function isCorrect(rowNumber, columnNumber, tileNumber) {
+	return puzzle.row[rowNumber].column[columnNumber].tile[tileNumber].answer.bool;
+}

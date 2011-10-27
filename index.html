@@ -1,47 +1,38 @@
-<html>
-    <head>
-        <title>
-    	    Zebra Puzzle
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>
+			Zebra Puzzle
 		</title>
-        <link href="./styles/computer.css" rel="stylesheet" type="text/css">
-				<script src="https://www.google.com/jsapi?key=ABQIAAAAFdti1WSalXCBvBGWG_B8yBTHTX3ap-9ER6gjhJqCFb29dttlmhQE4ZNjx_pdDznoaKE1sWujUJczZw"></script>
-				<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-				<script src="./javascript/resources/jquery.rightClick.js"></script>
-				<script src="./javascript/puzzle-object.js"></script>
-				<script src="./javascript/user-input.js"></script>
-				<script src="./javascript/clues/directional-clues.js"></script>
-				<script src="./javascript/clues/vertical-clues.js"></script>
-				<script src="./javascript/clues/near-clues.js"></script>
-				<script src="./javascript/clues/between-clues.js"></script>
-				<script src="./javascript/clue-engine.js"></script>	
+		<meta name="author" content="Nate Gay">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="styles/desktop.css" />
+		<script src="https://www.google.com/jsapi?key=ABQIAAAAFdti1WSalXCBvBGWG_B8yBTHTX3ap-9ER6gjhJqCFb29dttlmhQE4ZNjx_pdDznoaKE1sWujUJczZw"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/touch.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/puzzle-object.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/user-input.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/clues/directional-clues.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/clues/vertical-clues.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/clues/near-clues.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/clues/between-clues.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/clue-engine.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/resource-manager.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
-		<script language="JavaScript">
-			var puzzle = Object(),
-					resources = "./images/";
-			setupPuzzle();
-			renderPuzzle(puzzle);
-		</script>
-		<div class="info" id="instructions">
-			<h2>
-				How to Play
-			</h2>
-			The game board consists of three rows of six tiles. Inside each tile are six possible answers. For each tile, only one answer is correct. Similar to sudoku, an answer can be selected once per row. To select an answer, left click it. You may also rule out an answer by right clicking it.
-			<br /><br />
-			<h2>
-				Clue Types
-			</h2>
-			There are four types of clues, below the puzzle we have vertical clues.<br />
-			<strong>Vertical</strong> clues indicate tiles which are in the column.
-			To the right of the puzzle we have directional, near, and between clues.<br />
-			<strong>Directional</strong> clues consist of three dots between two tiles. Directional clues indicate that the left tile may be in any column left of the right tile and vice versa.<br />
-			<strong>Near</strong> clues consist of a bidirectional arrow between two tiles. Near clues indicate that the tiles are adjacent to one another. Note that the actual location of the left and right tiles may reversed.<br />
-			<strong>Between</strong> clues consist of a bidirectional arrow above a set of three tiles. Between clues indicate that the center tile is between and adjacent to both the left and right tiles. Note that the actual location of the left and right tiles may be reversed.
-			<br /><br />
-			<h2>
-				In the Works
-			</h2>
-			I have a lot of additions to make to the puzzle but here are a few things I am working on: the ability to save and resume your puzzle, high scores, and prettier graphics. Stay tuned and thank you for your support!
+		<div class="wrap">
+			<div class="nav">
+				<ul>
+					<li><a href="http://www.ohnate.com"><strong>HOME</strong></a></li>
+					<li><a href="http://www.ohnate.com/zebra-puzzle"><strong>ZEBRA PUZZLE</strong></a></li>
+				</ul>
+			</div>
+			<script language="JavaScript">
+				var puzzle = Object(),
+						resources = "./images/";
+				setupPuzzle();
+				renderPuzzle(puzzle);
+			</script>
 		</div>
 	</body>
 </html>

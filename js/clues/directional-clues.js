@@ -8,15 +8,15 @@ function generateDirectionalClue(unsolvableTile) {
 				};
 						
 		// extract random unsolvable tile and use it as either the left or right clue
-		if (unsolvableTile.column == puzzle.prefered.width) {
+		if (unsolvableTile.column == puzzle.preferred.width) {
 			clueRow.right = unsolvableTile.row;
 			clueColumn.right = unsolvableTile.column;
 			
 			// randomly select left row and column
-			clueRow.left = Math.floor(Math.random() * puzzle.prefered.height) + 1;
-			clueColumn.left = Math.floor(Math.random() * puzzle.prefered.width) + 1;
+			clueRow.left = Math.floor(Math.random() * puzzle.preferred.height) + 1;
+			clueColumn.left = Math.floor(Math.random() * puzzle.preferred.width) + 1;
 			while (clueColumn.right <= clueColumn.left) {
-				clueColumn.left = Math.floor(Math.random() * puzzle.prefered.width) + 1;
+				clueColumn.left = Math.floor(Math.random() * puzzle.preferred.width) + 1;
 			};
 		}
 		else if (unsolvableTile.column == 1) {
@@ -24,10 +24,10 @@ function generateDirectionalClue(unsolvableTile) {
 			clueColumn.left = unsolvableTile.column;
 			
 			// randomly select right row and column
-			clueRow.right = Math.floor(Math.random() * puzzle.prefered.height) + 1;
-			clueColumn.right = Math.floor(Math.random() * puzzle.prefered.width) + 1;
+			clueRow.right = Math.floor(Math.random() * puzzle.preferred.height) + 1;
+			clueColumn.right = Math.floor(Math.random() * puzzle.preferred.width) + 1;
 			while (clueColumn.left >= clueColumn.right) {
-				clueColumn.right = Math.floor(Math.random() * puzzle.prefered.width) + 1;
+				clueColumn.right = Math.floor(Math.random() * puzzle.preferred.width) + 1;
 			};
 		}
 		else {
@@ -38,10 +38,10 @@ function generateDirectionalClue(unsolvableTile) {
 				clueColumn.right = unsolvableTile.column;
 
 				// randomly select left row and column
-				clueRow.left = Math.floor(Math.random() * puzzle.prefered.height) + 1;
-				clueColumn.left = Math.floor(Math.random() * puzzle.prefered.width) + 1;
+				clueRow.left = Math.floor(Math.random() * puzzle.preferred.height) + 1;
+				clueColumn.left = Math.floor(Math.random() * puzzle.preferred.width) + 1;
 				while (clueColumn.right <= clueColumn.left) {
-					clueColumn.left = Math.floor(Math.random() * puzzle.prefered.width) + 1;
+					clueColumn.left = Math.floor(Math.random() * puzzle.preferred.width) + 1;
 				};
 			}
 			else {
@@ -49,10 +49,10 @@ function generateDirectionalClue(unsolvableTile) {
 				clueColumn.left = unsolvableTile.column;
 
 				// randomly select right row and column
-				clueRow.right = Math.floor(Math.random() * puzzle.prefered.height) + 1;
-				clueColumn.right = Math.floor(Math.random() * puzzle.prefered.width) + 1;
+				clueRow.right = Math.floor(Math.random() * puzzle.preferred.height) + 1;
+				clueColumn.right = Math.floor(Math.random() * puzzle.preferred.width) + 1;
 				while (clueColumn.left >= clueColumn.right) {
-					clueColumn.right = Math.floor(Math.random() * puzzle.prefered.width) + 1;
+					clueColumn.right = Math.floor(Math.random() * puzzle.preferred.width) + 1;
 				};
 			};
 		};
@@ -87,13 +87,11 @@ function displayDirectionalClue(leftTile, rightTile) {
 	var leftRow = leftTile[0], rightRow = rightTile[0], leftColumn = leftTile[1], rightColumn = rightTile[1];
 	puzzle.clues.count++;
 	puzzle.clues.directional.push([leftRow, tileAnswer(leftTile), rightRow, tileAnswer(rightTile)]);
-	$(".horizontalClueArea").append('<div class="horizontalClue clue' + puzzle.clues.count + '"><div style="background-image:url(' + resources + 'row' + leftRow + '/' + tileAnswer(leftTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'clues/direction.gif);" class="tile"></div><div style="background-image:url(' + resources + 'row' + rightRow + '/' + tileAnswer(rightTile) + '.jpg);" class="tile"></div></div>');
-	$(".clue" + puzzle.clues.count).rightClick( function(e) {
-		if (this.hasClass("flagged") == true) {
-			$(this).removeClass("flagged");
-		}
-		else if (this.hasClass("flagged") == false) {
-			$(this).addClass("flagged");
-		};
-	});
+//	$(".horizontalClueArea").append('<div class="horizontalClue clue' + puzzle.clues.count + '"><div style="background-image:url(' + resources + 'row' + leftRow + '/' + tileAnswer(leftTile) + '.jpg);" class="tile"></div><div style="background-image:url(' + resources + 'clues/direction.gif);" class="tile"></div><div style="background-image:url(' + resources + 'row' + rightRow + '/' + tileAnswer(rightTile) + '.jpg);" class="tile"></div></div>');
+	if (Math.round(Math.random()) == 1) {
+		$(".clues ol").append('<li>The ' + tileKind(leftRow, tileAnswer(leftTile)) + ' is to the left of the ' + tileKind(rightRow, tileAnswer(rightTile)) + '.</li>');
+	}
+	else {
+		$(".clues ol").append('<li>The ' + tileKind(rightRow, tileAnswer(rightTile)) + ' is to the right of the ' + tileKind(leftRow, tileAnswer(leftTile)) + '.</li>');
+	};
 };
