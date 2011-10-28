@@ -1,3 +1,57 @@
+/* The User Input Handler */
+/*
+		The user input handler manages what happens when a user clicks on, hovers over, or touches an object.
+*/
+$(function(){
+	
+	// what does the hide button do.
+	$(".hide-button").click(function() {
+		if ($(this).hasClass("on")) {
+			$(this).removeClass("on");
+			$(this).addClass("off");
+			hideButton = false;
+		}
+		else {
+			$(this).removeClass("off");
+			$(this).addClass("on");
+			hideButton = true;
+		}
+	});
+	
+	// when a mouse hovers over a tile...
+	
+	// if the answer is correct do the following
+	$(".guess").click(function() {
+		if (hideButton == true) {
+			if ($(this).hasClass("hidden")) {
+				$(this).removeClass("hidden");
+			}
+			else {
+				$(this).addClass("hidden");
+			};
+		}
+		else {
+			rowNumber = this.id.substring(0, 1);
+			columnNumber = this.id.substring(1, 2);
+			tileNumber = this.id.substring(2, 3);
+			if (!isCorrect(rowNumber, columnNumber, tileNumber)) {
+				$(this).addClass("incorrect");
+			};
+			userInput(rowNumber, columnNumber, tileNumber);
+		};
+	});
+	
+	// clues will become translucent if tapped
+	$(".clues li").click(function() {
+		if ($(this).hasClass("translucent")) {
+			$(this).removeClass("translucent");
+		}
+		else {
+			$(this).addClass("translucent");
+		}
+	});
+});
+
 function userInput(rowNumber, columnNumber, tileNumber) {	
 	if (isCorrect(rowNumber, columnNumber, tileNumber)) { // if the answer is correct
 		console.log("correct");

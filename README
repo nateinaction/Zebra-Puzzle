@@ -1,7 +1,7 @@
 @author Nate Gay @thenatedanger
 @copyright 2011 Nate Gay
 @licence GPLv3 <http://www.gnu.org/licenses/gpl.html>
-@version 0.06
+@version 0.07
 
 ABOUT:
 The Zebra puzzle, also known as Einstein's Puzzle or Einstein's Riddle, is a game for which is solved through the application of deductive reasoning and cognitive mapping.
@@ -24,6 +24,7 @@ PROJECT DIRECTION:
 * ONGOING: Write out clear instructions for how to play.
 
 VERSION HISTORY:
+* 0.07: The project is now open source! The ability to hide tiles on the board returns with the new design. Everything is now touch friendly.
 * 0.06: The puzzle now has a new look and uses high resolution puzzle tiles as CSS sprites to reduce number of HTTP requests on page load.
 * 0.05: The puzzle object now holds clues and preferences. The function that generates the puzzle object has been entirely separated from the function that renders the puzzle from the object. This will allow me to store a users game state in a database, retrieve it and render it without issue.
 * 0.04: Clues are generated until the puzzle is solvable.
@@ -31,3 +32,7 @@ VERSION HISTORY:
 * 0.02:	Clues are no longer allowed to repeat, clues now fail with console message when maximum number of possible clues is reached. The puzzle only generates if a minimum puzzle size of 3x4 is reached.
 * 0.01:	Rewrote code in accordance with project appendix, clues can now be flagged.
 * 0.00:	Fixed some spacing issues and testing git push.
+
+NOTES:
+* I do not own the pictures used in the puzzle. They are a part of Apple's emoji font included with iOS 5 and Mac OS X Lion.
+* This project would not be possible without the amazing jQuery library.

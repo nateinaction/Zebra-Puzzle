@@ -1,4 +1,7 @@
 /* The Puzzle Object */
+/*
+		The puzzle object creates, stores, and renders the puzzle state. Think of it as God.
+*/
 function setupPuzzle() {	
 	// setup some variables and objects
 	puzzle = {
@@ -108,6 +111,7 @@ function renderPuzzle(puzzle) {
 			};
 			document.write('</div>');
 		};
+		document.write('<div class="hide-button off"><strong>HIDE</strong></div>');
 		document.write('</div>');
 		document.write('<div class="clues"><ol></ol></div>');
 	}

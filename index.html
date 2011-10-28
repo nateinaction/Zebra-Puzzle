@@ -9,9 +9,8 @@
 		<link rel="stylesheet" type="text/css" href="styles/desktop.css" />
 		<script src="https://www.google.com/jsapi?key=ABQIAAAAFdti1WSalXCBvBGWG_B8yBTHTX3ap-9ER6gjhJqCFb29dttlmhQE4ZNjx_pdDznoaKE1sWujUJczZw"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/touch.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/puzzle-object.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/user-input.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/user-input-handler.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/clues/directional-clues.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/clues/vertical-clues.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/clues/near-clues.js" type="text/javascript" charset="utf-8"></script>
@@ -23,13 +22,12 @@
 		<div class="wrap">
 			<div class="nav">
 				<ul>
-					<li><a href="http://www.ohnate.com"><strong>HOME</strong></a></li>
 					<li><a href="http://www.ohnate.com/zebra-puzzle"><strong>ZEBRA PUZZLE</strong></a></li>
 				</ul>
 			</div>
 			<script language="JavaScript">
 				var puzzle = Object(),
-						resources = "./images/";
+						hideButton = false;
 				setupPuzzle();
 				renderPuzzle(puzzle);
 			</script>

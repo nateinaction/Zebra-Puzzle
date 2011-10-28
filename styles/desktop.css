@@ -252,3 +252,24 @@ div.clues ol li {
 .transport-row a.bus {
 	background-position: -150px 0px;
 }
+
+.hide-button {
+	height: 20px;
+	width: 48px;
+	padding: 5px;
+	border-radius: 3px;
+	position: absolute;
+	margin: -20px 680px;
+}
+
+.off {
+	background: gray;
+}
+
+.on {
+	background: green;
+}
+
+.hidden {
+	opacity:0.4;
+}
